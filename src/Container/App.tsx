@@ -1,8 +1,13 @@
 import React from 'react';
+import { Footer, Header } from '../Components/Layout';
 
 function App() {
   return (
-    <div className="App"> App </div>
+    <div>
+      <Header/>
+      Main Component
+      <Footer/>
+    </div>
   );
 }
 
