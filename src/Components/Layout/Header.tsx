@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 let logo = require("../../Assets/Images/techshop.png");
 
 function Header() {
@@ -6,9 +7,9 @@ function Header() {
     <div>
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <NavLink className="navbar-brand" to="/">
             <img src={logo} style={{ height: "40px" }} className="m-1" />
-          </a>
+          </NavLink>
           <button
             className="navbar-toggler"
             type="button"
@@ -23,9 +24,9 @@ function Header() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <NavLink className="nav-link active" aria-current="page" to="/">
                   Home
-                </a>
+                </NavLink>
               </li>
               <li className="nav-item dropdown">
                 <a
@@ -39,21 +40,30 @@ function Header() {
                 </a>
                 <ul className="dropdown-menu">
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <NavLink className="dropdown-item" to="/some-page">
                       Action
-                    </a>
+                    </NavLink>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <NavLink className="dropdown-item" to="/another-page">
                       Another action
-                    </a>
+                    </NavLink>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <NavLink className="dropdown-item" to="/yet-another-page">
                       Yet another action
-                    </a>
+                    </NavLink>
                   </li>
                 </ul>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/shoppingCart"
+                >
+                  <i className="bi bi-cart"></i>
+                </NavLink>
               </li>
             </ul>
           </div>
