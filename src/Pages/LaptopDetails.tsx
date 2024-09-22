@@ -5,7 +5,9 @@ import { useGetLaptopByIdQuery } from "../Apis/LaptopApi";
 import { useDispatch } from "react-redux";
 import { setLaptop } from "../Storage/Redux/laptopSlice";
 import { useNavigate } from "react-router-dom";
-
+import { useUpdateShoppingCartMutation } from "../Apis/shoppingCartApi";
+import { MainLoader, MiniLoader } from "../Components/Page/Common";
+// user id - 79728ebc-c531-473e-a02c-bdcd0566bdcf
 function LaptopDetails() {
   const { laptopId } = useParams();
   // const dispatch = useDispatch();
@@ -17,6 +19,8 @@ function LaptopDetails() {
   // }, [isLoading]);
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
+  const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
+  const [updateShoppingCart] = useUpdateShoppingCartMutation();
 
   const handleQuantity = (amount: number) => {
     let newQuantity = quantity + amount;
@@ -24,6 +28,20 @@ function LaptopDetails() {
       newQuantity = 1;
     }
     setQuantity(newQuantity);
+  };
+
+  const handleAddToCart = async (laptopId: number) => {
+    setIsAddingToCart(true);
+
+    const response = await updateShoppingCart({
+      laptopId: laptopId,
+      updateQuantityBy: quantity,
+      userId: "79728ebc-c531-473e-a02c-bdcd0566bdcf",
+    });
+
+    // console.log(response);
+
+    setIsAddingToCart(false);
   };
 
   return (
@@ -74,9 +92,18 @@ function LaptopDetails() {
             </span>
             <div className="row pt-4">
               <div className="col-5">
-                <button className="btn btn-success form-control">
-                  Add to Cart
-                </button>
+                {isAddingToCart ? (
+                  <button disabled className="btn btn-succes form-control">
+                    <MiniLoader />
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-success form-control"
+                    onClick={() => handleAddToCart(data.result.id)}
+                  >
+                    Add to Cart
+                  </button>
+                )}
               </div>
 
               <div className="col-5 ">
@@ -103,7 +130,7 @@ function LaptopDetails() {
           className="d-flex justify-content-center"
           style={{ width: "%100" }}
         >
-          <div>Loading...</div>
+          <MainLoader />
         </div>
       )}
     </div>

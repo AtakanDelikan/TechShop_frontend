@@ -5,6 +5,7 @@ import LaptopCard from "./LaptopCard";
 import { useGetLaptopsQuery } from "../../../Apis/LaptopApi";
 import { useDispatch } from "react-redux";
 import { setLaptop } from "../../../Storage/Redux/laptopSlice";
+import { MainLoader } from "../Common";
 
 function LaptopList() {
   // const [laptops, setLaptops] = useState<laptopModel[]>([]);
@@ -18,7 +19,7 @@ function LaptopList() {
   }, [isLoading]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <MainLoader />;
   }
 
   return (

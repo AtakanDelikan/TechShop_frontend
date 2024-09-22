@@ -1,3 +1,4 @@
 import laptopApi from "./LaptopApi";
+import shoppingCartApi from "./shoppingCartApi";
 
-export { laptopApi };
+export { laptopApi, shoppingCartApi };
