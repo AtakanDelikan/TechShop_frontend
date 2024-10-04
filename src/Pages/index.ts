@@ -4,5 +4,18 @@ import LaptopDetails from "./LaptopDetails";
 import ShoppingCart from "./ShoppingCart";
 import Register from "./Register";
 import Login from "./Login";
+import AccessDenied from "./AccessDenied";
+import AuthenticationTest from "./AuthenticationTest";
+import AuthenticationTestAdmin from "./AuthenticationTestAdmin";
 
-export { Home, NotFound, LaptopDetails, ShoppingCart, Register, Login };
+export {
+  Home,
+  NotFound,
+  LaptopDetails,
+  ShoppingCart,
+  Register,
+  Login,
+  AccessDenied,
+  AuthenticationTest,
+  AuthenticationTestAdmin,
+};

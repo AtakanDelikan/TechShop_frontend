@@ -80,6 +80,16 @@ function Header() {
                       Yet another action
                     </NavLink>
                   </li>
+                  <li>
+                    <NavLink className="dropdown-item" to="/authentication">
+                      Authentication
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink className="dropdown-item" to="/authorization">
+                      Authorization
+                    </NavLink>
+                  </li>
                 </ul>
               </li>
               <li className="nav-item">
@@ -89,9 +99,7 @@ function Header() {
                   to="/shoppingCart"
                 >
                   <i className="bi bi-cart"></i>
-                  {shoppingCartFromStore?.length
-                    ? ` (${shoppingCartFromStore.length})`
-                    : ""}
+                  {userData.id && ` (${shoppingCartFromStore.length})`}
                 </NavLink>
               </li>
               <div className="d-flex" style={{ marginLeft: "auto" }}>

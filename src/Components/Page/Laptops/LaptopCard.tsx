@@ -1,9 +1,13 @@
 import React from "react";
-import { laptopModel } from "../../../Interfaces";
+import { apiResponse, laptopModel, userModel } from "../../../Interfaces";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useUpdateShoppingCartMutation } from "../../../Apis/shoppingCartApi";
 import { MiniLoader } from "../Common";
+import { toastNotify } from "../../../Helper";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../Storage/Redux/store";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   laptop: laptopModel;
@@ -12,17 +16,27 @@ interface Props {
 function LaptopCard(props: Props) {
   const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
   const [updateShoppingCart] = useUpdateShoppingCartMutation();
+  const navigate = useNavigate();
+  const userData: userModel = useSelector(
+    (state: RootState) => state.userAuthStore
+  );
 
   const handleAddToCart = async (laptopId: number) => {
+    if (!userData.id) {
+      navigate("/login");
+      return;
+    }
     setIsAddingToCart(true);
 
-    const response = await updateShoppingCart({
+    const response: apiResponse = await updateShoppingCart({
       laptopId: laptopId,
       updateQuantityBy: 1,
-      userId: "79728ebc-c531-473e-a02c-bdcd0566bdcf",
+      userId: userData.id,
     });
 
-    // console.log(response);
+    if (response.data && response.data.isSuccess) {
+      toastNotify("Item added to cart successfully");
+    }
 
     setIsAddingToCart(false);
   };

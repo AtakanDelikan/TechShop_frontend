@@ -1,6 +1,9 @@
 import React from "react";
 import { Footer, Header } from "../Components/Layout";
 import {
+  AccessDenied,
+  AuthenticationTest,
+  AuthenticationTestAdmin,
   Home,
   LaptopDetails,
   Login,
@@ -10,19 +13,22 @@ import {
 } from "../Pages";
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useGetShoppingCartQuery } from "../Apis/shoppingCartApi";
 import { setShoppingCart } from "../Storage/Redux/shoppingCartSlice";
 import { jwtDecode } from "jwt-decode";
 import { userModel } from "../Interfaces";
 import { setLoggedInUser } from "../Storage/Redux/userAuthSlice";
+import { RootState } from "../Storage/Redux/store";
 
 function App() {
   const dispatch = useDispatch();
 
-  const { data, isLoading } = useGetShoppingCartQuery(
-    "79728ebc-c531-473e-a02c-bdcd0566bdcf"
+  const userData: userModel = useSelector(
+    (state: RootState) => state.userAuthStore
   );
+
+  const { data, isLoading } = useGetShoppingCartQuery(userData.id);
 
   useEffect(() => {
     const localToken = localStorage.getItem("token");
@@ -34,7 +40,6 @@ function App() {
 
   useEffect(() => {
     if (!isLoading) {
-      console.log(data.result);
       dispatch(setShoppingCart(data.result?.cartItems));
     }
   }, [data]);
@@ -52,6 +57,15 @@ function App() {
           <Route path="/shoppingCart" element={<ShoppingCart />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/accessDenied" element={<AccessDenied />}></Route>
+          <Route
+            path="/authorization"
+            element={<AuthenticationTestAdmin />}
+          ></Route>
+          <Route
+            path="/authentication"
+            element={<AuthenticationTest />}
+          ></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>

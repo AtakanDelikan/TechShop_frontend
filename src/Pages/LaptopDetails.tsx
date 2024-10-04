@@ -2,25 +2,25 @@ import React, { useImperativeHandle } from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useGetLaptopByIdQuery } from "../Apis/LaptopApi";
-import { useDispatch } from "react-redux";
-import { setLaptop } from "../Storage/Redux/laptopSlice";
+
 import { useNavigate } from "react-router-dom";
 import { useUpdateShoppingCartMutation } from "../Apis/shoppingCartApi";
 import { MainLoader, MiniLoader } from "../Components/Page/Common";
-// user id - 79728ebc-c531-473e-a02c-bdcd0566bdcf
+import { toastNotify } from "../Helper";
+import { apiResponse, userModel } from "../Interfaces";
+import { useSelector } from "react-redux";
+import { RootState } from "../Storage/Redux/store";
+
 function LaptopDetails() {
   const { laptopId } = useParams();
-  // const dispatch = useDispatch();
   const { data, isLoading } = useGetLaptopByIdQuery(laptopId);
-  // useEffect(() => {
-  //   if (!isLoading) {
-  //     dispatch(setLaptop(data.result));
-  //   }
-  // }, [isLoading]);
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
   const [updateShoppingCart] = useUpdateShoppingCartMutation();
+  const userData: userModel = useSelector(
+    (state: RootState) => state.userAuthStore
+  );
 
   const handleQuantity = (amount: number) => {
     let newQuantity = quantity + amount;
@@ -31,15 +31,22 @@ function LaptopDetails() {
   };
 
   const handleAddToCart = async (laptopId: number) => {
+    if (!userData.id) {
+      navigate("/login");
+      return;
+    }
+
     setIsAddingToCart(true);
 
-    const response = await updateShoppingCart({
+    const response: apiResponse = await updateShoppingCart({
       laptopId: laptopId,
       updateQuantityBy: quantity,
-      userId: "79728ebc-c531-473e-a02c-bdcd0566bdcf",
+      userId: userData.id,
     });
 
-    // console.log(response);
+    if (response.data && response.data.isSuccess) {
+      toastNotify("Item added to cart successfully");
+    }
 
     setIsAddingToCart(false);
   };
