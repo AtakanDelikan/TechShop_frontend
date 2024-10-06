@@ -8,6 +8,7 @@ import {
   LaptopDetails,
   Login,
   NotFound,
+  Payment,
   Register,
   ShoppingCart,
 } from "../Pages";
@@ -66,6 +67,7 @@ function App() {
             path="/authentication"
             element={<AuthenticationTest />}
           ></Route>
+          <Route path="/payment" element={<Payment />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>
