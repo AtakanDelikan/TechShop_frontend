@@ -8,6 +8,10 @@ import AccessDenied from "./AccessDenied";
 import AuthenticationTest from "./AuthenticationTest";
 import AuthenticationTestAdmin from "./AuthenticationTestAdmin";
 import Payment from "./Payment";
+import OrderConfirmed from "./Order/OrderConfirmed";
+import MyOrders from "./Order/MyOrders";
+import OrderDetails from "./Order/OrderDetails";
+import AllOrders from "./Order/AllOrders";
 
 export {
   Home,
@@ -20,4 +24,8 @@ export {
   AuthenticationTest,
   AuthenticationTestAdmin,
   Payment,
+  OrderConfirmed,
+  MyOrders,
+  OrderDetails,
+  AllOrders,
 };

@@ -2,12 +2,16 @@ import React from "react";
 import { Footer, Header } from "../Components/Layout";
 import {
   AccessDenied,
+  AllOrders,
   AuthenticationTest,
   AuthenticationTestAdmin,
   Home,
   LaptopDetails,
   Login,
+  MyOrders,
   NotFound,
+  OrderConfirmed,
+  OrderDetails,
   Payment,
   Register,
   ShoppingCart,
@@ -68,6 +72,16 @@ function App() {
             element={<AuthenticationTest />}
           ></Route>
           <Route path="/payment" element={<Payment />}></Route>
+          <Route
+            path="/order/orderconfirmed/:id"
+            element={<OrderConfirmed />}
+          ></Route>
+          <Route path="/order/myorders" element={<MyOrders />}></Route>
+          <Route
+            path="/order/orderDetails/:id"
+            element={<OrderDetails />}
+          ></Route>
+          <Route path="/order/allOrders" element={<AllOrders />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>

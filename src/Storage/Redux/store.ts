@@ -1,6 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { laptopReducer } from "./laptopSlice";
-import { authApi, laptopApi, paymentApi, shoppingCartApi } from "../../Apis";
+import {
+  authApi,
+  laptopApi,
+  orderApi,
+  paymentApi,
+  shoppingCartApi,
+} from "../../Apis";
 import { getDefaultSettings } from "http2";
 import { shoppingCartReducer } from "./shoppingCartSlice";
 import { userAuthReducer } from "./userAuthSlice";
@@ -14,13 +20,15 @@ const store = configureStore({
     [shoppingCartApi.reducerPath]: shoppingCartApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [paymentApi.reducerPath]: paymentApi.reducer,
+    [orderApi.reducerPath]: orderApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(laptopApi.middleware)
       .concat(shoppingCartApi.middleware)
       .concat(authApi.middleware)
-      .concat(paymentApi.middleware),
+      .concat(paymentApi.middleware)
+      .concat(orderApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
