@@ -78,8 +78,11 @@ function Header() {
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink className="dropdown-item" to="/yet-another-page">
-                        Yet another action
+                      <NavLink
+                        className="dropdown-item"
+                        to="/laptop/laptoplist"
+                      >
+                        Products
                       </NavLink>
                     </li>
                     <li>

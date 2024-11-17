@@ -7,6 +7,8 @@ import {
   AuthenticationTestAdmin,
   Home,
   LaptopDetails,
+  LaptopList,
+  LaptopUpsert,
   Login,
   MyOrders,
   NotFound,
@@ -82,6 +84,12 @@ function App() {
             element={<OrderDetails />}
           ></Route>
           <Route path="/order/allOrders" element={<AllOrders />}></Route>
+          <Route path="/laptop/laptopList" element={<LaptopList />}></Route>
+          <Route
+            path="/laptop/laptopUpsert/:id"
+            element={<LaptopUpsert />}
+          ></Route>
+          <Route path="/laptop/laptopUpsert" element={<LaptopUpsert />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>

@@ -12,6 +12,8 @@ import OrderConfirmed from "./Order/OrderConfirmed";
 import MyOrders from "./Order/MyOrders";
 import OrderDetails from "./Order/OrderDetails";
 import AllOrders from "./Order/AllOrders";
+import LaptopList from "./Laptop/LaptopList";
+import LaptopUpsert from "./Laptop/LaptopUpsert";
 
 export {
   Home,
@@ -28,4 +30,6 @@ export {
   MyOrders,
   OrderDetails,
   AllOrders,
+  LaptopList,
+  LaptopUpsert,
 };

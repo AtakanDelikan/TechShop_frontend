@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import cartItemModel from "../../../Interfaces/cartItemModel";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../Storage/Redux/store";
@@ -14,6 +14,15 @@ function CartPickUpDetails() {
     (state: RootState) => state.shoppingCartStore.cartItems ?? []
   );
   const userData = useSelector((state: RootState) => state.userAuthStore);
+
+  useEffect(() => {
+    setUserInput({
+      name: userData.fullName,
+      email: userData.email,
+      phoneNumber: "",
+    });
+  }, [userData]);
+
   let grandTotal = 0;
   let totalItems = 0;
 

@@ -21,8 +21,37 @@ const laptopApi = createApi({
       }),
       providesTags: ["Laptops"],
     }),
+    updateLaptop: builder.mutation({
+      query: ({ data, id }) => ({
+        url: "laptop/" + id,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["Laptops"],
+    }),
+    createLaptop: builder.mutation({
+      query: (data) => ({
+        url: "laptop",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Laptops"],
+    }),
+    deleteLaptop: builder.mutation({
+      query: (id) => ({
+        url: "laptop/" + id,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Laptops"],
+    }),
   }),
 });
 
-export const { useGetLaptopsQuery, useGetLaptopByIdQuery } = laptopApi;
+export const {
+  useGetLaptopsQuery,
+  useGetLaptopByIdQuery,
+  useCreateLaptopMutation,
+  useDeleteLaptopMutation,
+  useUpdateLaptopMutation,
+} = laptopApi;
 export default laptopApi;
