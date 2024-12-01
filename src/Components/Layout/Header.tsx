@@ -86,13 +86,16 @@ function Header() {
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink className="dropdown-item" to="/authentication">
-                        Authentication
+                      <NavLink
+                        className="dropdown-item"
+                        to="/category/categorylist"
+                      >
+                        Categories
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink className="dropdown-item" to="/authorization">
-                        Authorization
+                      <NavLink className="dropdown-item" to="/testpage">
+                        Test Page
                       </NavLink>
                     </li>
                   </ul>

@@ -6,6 +6,7 @@ import {
   orderApi,
   paymentApi,
   shoppingCartApi,
+  categoryApi,
 } from "../../Apis";
 import { getDefaultSettings } from "http2";
 import { shoppingCartReducer } from "./shoppingCartSlice";
@@ -21,6 +22,7 @@ const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [paymentApi.reducerPath]: paymentApi.reducer,
     [orderApi.reducerPath]: orderApi.reducer,
+    [categoryApi.reducerPath]: categoryApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -28,7 +30,8 @@ const store = configureStore({
       .concat(shoppingCartApi.middleware)
       .concat(authApi.middleware)
       .concat(paymentApi.middleware)
-      .concat(orderApi.middleware),
+      .concat(orderApi.middleware)
+      .concat(categoryApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

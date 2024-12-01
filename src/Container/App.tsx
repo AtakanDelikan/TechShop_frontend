@@ -5,6 +5,7 @@ import {
   AllOrders,
   AuthenticationTest,
   AuthenticationTestAdmin,
+  CategoryList,
   Home,
   LaptopDetails,
   LaptopList,
@@ -17,6 +18,7 @@ import {
   Payment,
   Register,
   ShoppingCart,
+  TestPage,
 } from "../Pages";
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
@@ -27,6 +29,7 @@ import { jwtDecode } from "jwt-decode";
 import { userModel } from "../Interfaces";
 import { setLoggedInUser } from "../Storage/Redux/userAuthSlice";
 import { RootState } from "../Storage/Redux/store";
+import CategoryCreate from "../Pages/Category/CategoryCreate";
 
 function App() {
   const dispatch = useDispatch();
@@ -90,6 +93,15 @@ function App() {
             element={<LaptopUpsert />}
           ></Route>
           <Route path="/laptop/laptopUpsert" element={<LaptopUpsert />}></Route>
+          <Route
+            path="/category/categorylist"
+            element={<CategoryList />}
+          ></Route>
+          <Route
+            path="/category/categorycreate"
+            element={<CategoryCreate />}
+          ></Route>
+          <Route path="/testpage" element={<TestPage />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>

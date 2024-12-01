@@ -14,6 +14,8 @@ import OrderDetails from "./Order/OrderDetails";
 import AllOrders from "./Order/AllOrders";
 import LaptopList from "./Laptop/LaptopList";
 import LaptopUpsert from "./Laptop/LaptopUpsert";
+import CategoryList from "./Category/CategoryList";
+import TestPage from "./TestPage";
 
 export {
   Home,
@@ -32,4 +34,6 @@ export {
   AllOrders,
   LaptopList,
   LaptopUpsert,
+  CategoryList,
+  TestPage,
 };

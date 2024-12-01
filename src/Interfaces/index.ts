@@ -4,6 +4,7 @@ import userModel from "./userModel";
 import apiResponse from "./apiResponse";
 import orderHeaderModel from "./orderHeaderModel";
 import orderDetailModel from "./orderDetailModel";
+import categoryModel from "./categoryModel";
 
 export type {
   laptopModel,
@@ -12,4 +13,5 @@ export type {
   apiResponse,
   orderDetailModel,
   orderHeaderModel,
+  categoryModel,
 };
