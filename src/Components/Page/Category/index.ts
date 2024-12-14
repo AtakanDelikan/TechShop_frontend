@@ -1,3 +1,4 @@
 import CategoryDropdownButton from "./CategoryDropdownButton";
+import CategoryAttributeList from "./CategoryAttributeList";
 
-export { CategoryDropdownButton };
+export { CategoryDropdownButton, CategoryAttributeList };

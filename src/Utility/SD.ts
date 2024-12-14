@@ -11,3 +11,10 @@ export enum SD_Status {
   DELIVERED = "Delivered",
   CANCELLED = "Cancelled",
 }
+
+export enum SD_DataTypes {
+  STRING = "1",
+  INTEGER = "2",
+  DECIMAL = "3",
+  BOOLEAN = "4",
+}

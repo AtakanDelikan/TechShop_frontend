@@ -5,6 +5,7 @@ import {
   AllOrders,
   AuthenticationTest,
   AuthenticationTestAdmin,
+  CategoryAttributes,
   CategoryList,
   Home,
   LaptopDetails,
@@ -57,7 +58,7 @@ function App() {
   return (
     <div>
       <Header />
-      <div className="pb-5">
+      <div className="pb-5 mb-5">
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route
@@ -100,6 +101,10 @@ function App() {
           <Route
             path="/category/categorycreate"
             element={<CategoryCreate />}
+          ></Route>
+          <Route
+            path="/category/categoryAttributes"
+            element={<CategoryAttributes />}
           ></Route>
           <Route path="/testpage" element={<TestPage />}></Route>
           <Route path="*" element={<NotFound />}></Route>

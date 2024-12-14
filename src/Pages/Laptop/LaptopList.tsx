@@ -45,7 +45,7 @@ function LaptopList() {
       </div>
       <div className="p-2">
         <div className="row border">
-          <div className="col-1">Image</div>
+          <div className="col-2">Image</div>
           <div className="col-1">ID</div>
           <div className="col-2">Name</div>
           <div className="col-2">Category</div>

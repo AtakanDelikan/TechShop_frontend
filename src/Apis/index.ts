@@ -4,6 +4,7 @@ import authApi from "./authApi";
 import paymentApi from "./paymentApi";
 import orderApi from "./orderApi";
 import categoryApi from "./categoryApi";
+import categoryAttributeApi from "./categoryAttributeApi";
 
 export {
   laptopApi,
@@ -12,4 +13,5 @@ export {
   paymentApi,
   orderApi,
   categoryApi,
+  categoryAttributeApi,
 };

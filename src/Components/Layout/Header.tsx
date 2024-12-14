@@ -94,6 +94,14 @@ function Header() {
                       </NavLink>
                     </li>
                     <li>
+                      <NavLink
+                        className="dropdown-item"
+                        to="/category/categoryAttributes"
+                      >
+                        Category Attributes
+                      </NavLink>
+                    </li>
+                    <li>
                       <NavLink className="dropdown-item" to="/testpage">
                         Test Page
                       </NavLink>

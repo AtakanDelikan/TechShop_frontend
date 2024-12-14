@@ -16,6 +16,7 @@ import LaptopList from "./Laptop/LaptopList";
 import LaptopUpsert from "./Laptop/LaptopUpsert";
 import CategoryList from "./Category/CategoryList";
 import TestPage from "./TestPage";
+import CategoryAttributes from "./Category/CategoryAttributes";
 
 export {
   Home,
@@ -36,4 +37,5 @@ export {
   LaptopUpsert,
   CategoryList,
   TestPage,
+  CategoryAttributes,
 };
