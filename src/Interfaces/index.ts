@@ -5,6 +5,7 @@ import apiResponse from "./apiResponse";
 import orderHeaderModel from "./orderHeaderModel";
 import orderDetailModel from "./orderDetailModel";
 import categoryModel from "./categoryModel";
+import attributeModel from "./attributeModel";
 
 export type {
   laptopModel,
@@ -14,4 +15,5 @@ export type {
   orderDetailModel,
   orderHeaderModel,
   categoryModel,
+  attributeModel,
 };

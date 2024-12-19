@@ -12,7 +12,7 @@ import { useCreateCategoryAttributeMutation } from "../../Apis/categoryAttribute
 
 const rootCategory: categoryModel = {
   id: 0,
-  name: "No Parent",
+  name: "",
   subCategories: [],
 };
 

@@ -13,8 +13,8 @@ export enum SD_Status {
 }
 
 export enum SD_DataTypes {
-  STRING = "1",
-  INTEGER = "2",
-  DECIMAL = "3",
-  BOOLEAN = "4",
+  STRING = 1,
+  INTEGER = 2,
+  DECIMAL = 3,
+  BOOLEAN = 4,
 }

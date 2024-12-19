@@ -17,6 +17,8 @@ import LaptopUpsert from "./Laptop/LaptopUpsert";
 import CategoryList from "./Category/CategoryList";
 import TestPage from "./TestPage";
 import CategoryAttributes from "./Category/CategoryAttributes";
+import ProductList from "./Product/ProductList";
+import ProductUpsert from "./Product/ProductUpsert";
 
 export {
   Home,
@@ -38,4 +40,6 @@ export {
   CategoryList,
   TestPage,
   CategoryAttributes,
+  ProductList,
+  ProductUpsert,
 };

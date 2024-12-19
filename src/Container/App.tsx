@@ -17,6 +17,8 @@ import {
   OrderConfirmed,
   OrderDetails,
   Payment,
+  ProductList,
+  ProductUpsert,
   Register,
   ShoppingCart,
   TestPage,
@@ -105,6 +107,15 @@ function App() {
           <Route
             path="/category/categoryAttributes"
             element={<CategoryAttributes />}
+          ></Route>
+          <Route
+            path="/product/categoryAttributes"
+            element={<CategoryAttributes />}
+          ></Route>
+          <Route path="/product/productList" element={<ProductList />}></Route>
+          <Route
+            path="/product/productUpsert"
+            element={<ProductUpsert />}
           ></Route>
           <Route path="/testpage" element={<TestPage />}></Route>
           <Route path="*" element={<NotFound />}></Route>
