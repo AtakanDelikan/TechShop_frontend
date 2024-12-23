@@ -132,7 +132,7 @@ function ProductAttributeForm(props: Props) {
         {data?.result.length > 0 && (
           <>
             <div className="row justify-content-md-center mt-3">
-              <div className="col-6 border">
+              <div className="border">
                 <div className="row p-1 justify-content-md-center">
                   <div className="col-6 fw-bold">Attribute Name</div>
                   <div className="col-6 fw-bold">Attribute Value</div>
@@ -141,7 +141,7 @@ function ProductAttributeForm(props: Props) {
             </div>
             {props.attributes.map((attribute: attributeModel) => (
               <div className="row justify-content-md-center" key={attribute.id}>
-                <div className="col-6 border">
+                <div className="border">
                   <div className="row p-1">
                     <div className="col-6">{attribute.name}</div>
                     <div className="col-6">{renderInput(attribute)}</div>

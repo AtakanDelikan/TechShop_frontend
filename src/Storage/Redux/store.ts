@@ -13,6 +13,7 @@ import {
 } from "../../Apis";
 import { shoppingCartReducer } from "./shoppingCartSlice";
 import { userAuthReducer } from "./userAuthSlice";
+import productImageApi from "../../Apis/productImageApi";
 
 const store = configureStore({
   reducer: {
@@ -28,6 +29,7 @@ const store = configureStore({
     [categoryAttributeApi.reducerPath]: categoryAttributeApi.reducer,
     [productApi.reducerPath]: productApi.reducer,
     [productAttributeApi.reducerPath]: productAttributeApi.reducer,
+    [productImageApi.reducerPath]: productImageApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -39,7 +41,8 @@ const store = configureStore({
       .concat(categoryApi.middleware)
       .concat(categoryAttributeApi.middleware)
       .concat(productApi.middleware)
-      .concat(productAttributeApi.middleware),
+      .concat(productAttributeApi.middleware)
+      .concat(productImageApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -35,17 +35,16 @@ function CategoryAttributes() {
     e.preventDefault();
     setLoading(true);
 
-    const formData = new FormData();
-    formData.append("CategoryId", selectedCategory.id.toString());
-    formData.append("AttributeName", userInput.attributeName);
-    formData.append("DataType", userInput.dataType);
-
-    const response: apiResponse = await createCategoryAttribute(formData);
+    const response: apiResponse = await createCategoryAttribute({
+      categoryId: selectedCategory.id,
+      attributeName: userInput.attributeName,
+      dataType: parseInt(userInput.dataType, 10),
+    });
 
     console.log(response);
-    if (response.data) {
+    if (response.data && response.data.isSuccess) {
       toastNotify("Category Attribute created successfully!");
-    } else if (response.error) {
+    } else if (response.error || !response.data?.isSuccess) {
       toastNotify("There has been some error!", "error");
     }
 
