@@ -28,7 +28,6 @@ function CategoryAttributes() {
 
   const onCategorySelect = (category: categoryModel) => {
     setCategory(category);
-    console.log(category.id);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -41,7 +40,6 @@ function CategoryAttributes() {
       dataType: parseInt(userInput.dataType, 10),
     });
 
-    console.log(response);
     if (response.data && response.data.isSuccess) {
       toastNotify("Category Attribute created successfully!");
     } else if (response.error || !response.data?.isSuccess) {

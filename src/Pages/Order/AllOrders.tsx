@@ -8,7 +8,6 @@ import { MainLoader } from "../../Components/Page/Common";
 
 function AllOrders() {
   const { data, isLoading } = useGetAllOrdersQuery("");
-  console.log(data);
 
   return (
     <>

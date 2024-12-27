@@ -1,32 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MainLoader } from "../../Components/Page/Common";
 import { toast } from "react-toastify";
-import { useGetProductsQuery } from "../../Apis/productApi";
+import {
+  useDeleteProductMutation,
+  useGetProductsByCategoryQuery,
+  useGetProductsQuery,
+} from "../../Apis/productApi";
+import { CategoryDropdownButton } from "../../Components/Page/Category";
+import { categoryModel } from "../../Interfaces";
+import { useGetCategoriesQuery } from "../../Apis/categoryApi";
 
 function ProductList() {
+  const rootCategory: categoryModel = {
+    id: 0,
+    name: "All categories",
+    subCategories: [],
+  };
+  const [selectedCategory, setCategory] = useState(rootCategory);
+
   const navigate = useNavigate();
-  // const [deleteProduct] = useDeleteProductMutation();
-  const { data, isLoading } = useGetProductsQuery(null);
+  const [deleteProduct] = useDeleteProductMutation();
+  const { data: productsData, isLoading: isProductsLoading } =
+    useGetProductsByCategoryQuery(selectedCategory.id);
+  const { data: categoriesData, isLoading: isCategoriesLoading } =
+    useGetCategoriesQuery(null);
 
   const handleProductDelete = async (id: number) => {
-    // toast.promise(
-    //   deleteProduct(id),
-    //   {
-    //     pending: "Deleting product",
-    //     success: "Product deleted successfully",
-    //     error: "An error occured while deleting",
-    //   },
-    //   {
-    //     theme: "light",
-    //   }
-    // );
+    toast.promise(
+      deleteProduct(id),
+      {
+        pending: "Deleting product",
+        success: "Product deleted successfully",
+        error: "An error occured while deleting",
+      },
+      {
+        theme: "light",
+      }
+    );
   };
 
-  if (isLoading) {
+  if (isProductsLoading || isCategoriesLoading) {
     return <MainLoader />;
   }
-
+  const updatedCategories = [rootCategory, ...categoriesData.result];
   return (
     <div className="table p-5">
       <div className="d-flex align-items-center justify-content-between">
@@ -38,6 +55,10 @@ function ProductList() {
           Add New
         </button>
       </div>
+      <CategoryDropdownButton
+        categories={updatedCategories}
+        onSelect={setCategory}
+      />
       <div className="p-2">
         <div className="row border">
           <div className="col-2">Image</div>
@@ -49,8 +70,8 @@ function ProductList() {
           <div className="col-1">Action</div>
         </div>
 
-        {data.result.length > 0 &&
-          data.result.map((product: any, index: number) => (
+        {productsData?.result?.length > 0 &&
+          productsData.result.map((product: any, index: number) => (
             <div className="row border" key={product.id}>
               <div className="col-2">
                 <img
@@ -67,7 +88,7 @@ function ProductList() {
               <div className="col-1">
                 <button
                   className="btn btn-success"
-                  onClick={() => navigate(`/laptop/laptopupsert/${product.id}`)}
+                  // onClick={() => navigate(`/product/productupsert/${product.id}`)}
                 >
                   <i className="bi bi-pencil-fill"></i>
                 </button>

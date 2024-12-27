@@ -14,7 +14,6 @@ function CategoryAttributeList(props: Props) {
   if (isLoading) {
     return <MainLoader />;
   }
-  console.log(data?.result);
   return (
     <>
       <div>

@@ -15,7 +15,6 @@ import AllOrders from "./Order/AllOrders";
 import LaptopList from "./Laptop/LaptopList";
 import LaptopUpsert from "./Laptop/LaptopUpsert";
 import CategoryList from "./Category/CategoryList";
-import TestPage from "./TestPage";
 import CategoryAttributes from "./Category/CategoryAttributes";
 import ProductList from "./Product/ProductList";
 import ProductUpsert from "./Product/ProductUpsert";
@@ -38,7 +37,6 @@ export {
   LaptopList,
   LaptopUpsert,
   CategoryList,
-  TestPage,
   CategoryAttributes,
   ProductList,
   ProductUpsert,

@@ -38,7 +38,6 @@ const CategoryCreate = () => {
       parentCategoryId: parentCategory.id,
     });
 
-    console.log(response);
     if (response.data) {
       toastNotify("Category created successfully!");
     } else if (response.error) {

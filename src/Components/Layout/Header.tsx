@@ -80,14 +80,6 @@ function Header() {
                     <li>
                       <NavLink
                         className="dropdown-item"
-                        to="/laptop/laptoplist"
-                      >
-                        Products
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        className="dropdown-item"
                         to="/category/categorylist"
                       >
                         Categories
@@ -107,11 +99,6 @@ function Header() {
                         to="/product/productList"
                       >
                         Products
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink className="dropdown-item" to="/testpage">
-                        Test Page
                       </NavLink>
                     </li>
                   </ul>

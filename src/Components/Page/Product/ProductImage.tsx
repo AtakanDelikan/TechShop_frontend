@@ -27,6 +27,17 @@ function ProductImage(props: Props) {
     }
   };
 
+  const handleDelete = (deleteIndex: any) => {
+    if (deleteIndex < props.images.length) {
+      props.setImages((prevImages) => {
+        const newImages = prevImages.filter(
+          (_, index) => index !== deleteIndex
+        );
+        return newImages;
+      });
+    }
+  };
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
     if (file) {
@@ -70,12 +81,19 @@ function ProductImage(props: Props) {
         {props.images[0] && (
           <div
             key={0}
-            className="col-12 mb-3 p-1"
+            className="col-12 mb-3 p-1 position-relative"
             draggable
             onDragStart={(event) => handleDragStart(0)(event)}
             onDragOver={(e) => e.preventDefault()}
             onDrop={(event) => handleDrop(0)(event)}
           >
+            <button
+              type="button"
+              className="btn btn-danger btn-sm position-absolute top-0 end-0 m-1"
+              onClick={() => handleDelete(0)}
+            >
+              <i className="bi bi-x"></i>
+            </button>
             <div className="p-3 border" style={{ aspectRatio: "1.4 / 1" }}>
               <img
                 src={props.images[0]}
@@ -94,12 +112,20 @@ function ProductImage(props: Props) {
           <div
             // key={image.id}
             key={index + 1}
-            className="col-4 m-0 p-1"
+            className="col-4 m-0 p-1 position-relative"
             draggable
             onDragStart={(event) => handleDragStart(index + 1)(event)}
             onDragOver={(e) => e.preventDefault()}
             onDrop={(event) => handleDrop(index + 1)(event)}
           >
+            <button
+              type="button"
+              className="btn btn-danger btn-sm position-absolute top-0 end-0 m-0"
+              style={{ padding: "0rem 0.2rem" }}
+              onClick={() => handleDelete(index + 1)}
+            >
+              <i className="bi bi-x"></i>
+            </button>
             <div className="p-2 border" style={{ aspectRatio: "1.4 / 1" }}>
               <img
                 src={image}
