@@ -17,6 +17,7 @@ import {
   OrderConfirmed,
   OrderDetails,
   Payment,
+  ProductPage,
   ProductList,
   ProductUpsert,
   Register,
@@ -116,6 +117,7 @@ function App() {
             path="/product/productUpsert"
             element={<ProductUpsert />}
           ></Route>
+          <Route path="/product/:id" element={<ProductPage />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>

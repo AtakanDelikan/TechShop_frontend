@@ -18,7 +18,7 @@ import CategoryList from "./Category/CategoryList";
 import CategoryAttributes from "./Category/CategoryAttributes";
 import ProductList from "./Product/ProductList";
 import ProductUpsert from "./Product/ProductUpsert";
-
+import ProductPage from "./Product/ProductPage";
 export {
   Home,
   NotFound,
@@ -40,4 +40,5 @@ export {
   CategoryAttributes,
   ProductList,
   ProductUpsert,
+  ProductPage,
 };
