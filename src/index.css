@@ -12,8 +12,13 @@ code {
     monospace;
 }
 
+.footer {
+  z-index: 999 !important;
+}
+
 .dropdown-submenu {
   position: relative;
+  z-index: 1000;
 }
 
 .dropdown-submenu > .dropdown-menu {

@@ -22,6 +22,7 @@ import {
   ProductUpsert,
   Register,
   ShoppingCart,
+  CategoryPage,
 } from "../Pages";
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
@@ -60,7 +61,8 @@ function App() {
   return (
     <div>
       <Header />
-      <div className="pb-5 mb-5">
+      {/* adding some marginBottom to offset footer */}
+      <div style={{ marginBottom: "56px" }}>
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route
@@ -112,6 +114,7 @@ function App() {
             path="/product/categoryAttributes"
             element={<CategoryAttributes />}
           ></Route>
+          <Route path="/category/:id" element={<CategoryPage />}></Route>
           <Route path="/product/productList" element={<ProductList />}></Route>
           <Route
             path="/product/productUpsert"
