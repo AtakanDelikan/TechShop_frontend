@@ -17,21 +17,19 @@ function ProductImageDisplay(props: Props) {
     <div className="ms-3">
       <div className="row">
         {/* First Image - Larger and spans entire row */}
-        {props.images[0] && (
-          <div key={0} className="col-12 mb-3 p-1 position-relative">
-            <div className="p-3 border" style={{ aspectRatio: "1.4 / 1" }}>
-              <img
-                src={mainImage}
-                alt={`Main image`}
-                style={{
-                  maxWidth: "100%",
-                  maxHeight: "100%",
-                  objectFit: "cover",
-                }}
-              />
-            </div>
+        <div key={0} className="col-12 mb-3 p-1 position-relative">
+          <div className="p-3 border" style={{ aspectRatio: "1.4 / 1" }}>
+            <img
+              src={mainImage || "https://placehold.co/600x400/EEE/31343C"}
+              alt={`Main image`}
+              style={{
+                maxWidth: "100%",
+                maxHeight: "100%",
+                objectFit: "cover",
+              }}
+            />
           </div>
-        )}
+        </div>
         {/* Remaining Images */}
         {props.images.map((image, index) => (
           <div

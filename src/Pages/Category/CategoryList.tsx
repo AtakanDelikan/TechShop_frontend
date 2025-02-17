@@ -60,7 +60,7 @@ function CategoryList() {
                   type="button"
                   className="btn btn-success btn-sm"
                   style={{ padding: "0rem 0.2rem" }}
-                  onClick={() => console.log("Not implemented yet!")}
+                  onClick={() => toastNotify("Not implemented yet!", "error")}
                 >
                   <i className="bi bi-pencil-fill"></i>
                 </button>

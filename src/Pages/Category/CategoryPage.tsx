@@ -30,7 +30,6 @@ function CategoryPage() {
   if (!data) {
     return <NotFound />;
   }
-  console.log(products);
 
   return (
     <>

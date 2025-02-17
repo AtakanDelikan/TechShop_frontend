@@ -54,7 +54,7 @@ function App() {
 
   useEffect(() => {
     if (!isLoading) {
-      dispatch(setShoppingCart(data.result?.cartItems));
+      dispatch(setShoppingCart(data?.result?.cartItems));
     }
   }, [data]);
 

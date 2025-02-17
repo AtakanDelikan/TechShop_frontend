@@ -34,7 +34,7 @@ function CartPickUpDetails() {
 
   shoppingCartFromStore?.map((cartItem: cartItemModel) => {
     totalItems += cartItem.quantity ?? 0;
-    grandTotal += (cartItem.laptop?.price ?? 0) * (cartItem.quantity ?? 0);
+    grandTotal += (cartItem.product?.price ?? 0) * (cartItem.quantity ?? 0);
     return null;
   });
 

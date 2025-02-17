@@ -33,7 +33,7 @@ function ProductPage() {
     setQuantity(newQuantity);
   };
 
-  const handleAddToCart = async (laptopId: number) => {
+  const handleAddToCart = async (productId: number) => {
     if (!userData.id) {
       navigate("/login");
       return;
@@ -42,7 +42,7 @@ function ProductPage() {
     setIsAddingToCart(true);
 
     const response: apiResponse = await updateShoppingCart({
-      laptopId: laptopId,
+      productId: productId,
       updateQuantityBy: quantity,
       userId: userData.id,
     });
@@ -59,7 +59,7 @@ function ProductPage() {
   if (isLoading) {
     return <MainLoader />;
   }
-  console.log(data);
+
   if (data === undefined) {
     return <NotFound />;
   }

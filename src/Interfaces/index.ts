@@ -6,6 +6,8 @@ import orderHeaderModel from "./orderHeaderModel";
 import orderDetailModel from "./orderDetailModel";
 import categoryModel from "./categoryModel";
 import attributeModel from "./attributeModel";
+import productModel from "./productModel";
+import productImageModel from "./productImageModel";
 
 export type {
   laptopModel,
@@ -16,4 +18,6 @@ export type {
   orderHeaderModel,
   categoryModel,
   attributeModel,
+  productModel,
+  productImageModel,
 };

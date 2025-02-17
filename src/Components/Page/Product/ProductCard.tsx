@@ -1,5 +1,5 @@
 import React from "react";
-import { apiResponse, laptopModel, userModel } from "../../../Interfaces";
+import { apiResponse, userModel } from "../../../Interfaces";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useUpdateShoppingCartMutation } from "../../../Apis/shoppingCartApi";
@@ -21,7 +21,7 @@ function ProductCard(props: Props) {
     (state: RootState) => state.userAuthStore
   );
 
-  const handleAddToCart = async (laptopId: number) => {
+  const handleAddToCart = async (productId: number) => {
     if (!userData.id) {
       navigate("/login");
       return;
@@ -29,7 +29,7 @@ function ProductCard(props: Props) {
     setIsAddingToCart(true);
 
     const response: apiResponse = await updateShoppingCart({
-      laptopId: laptopId,
+      productId: productId,
       updateQuantityBy: 1,
       userId: userData.id,
     });
@@ -51,7 +51,10 @@ function ProductCard(props: Props) {
           <div className="row col-10 offset-1 p-4">
             <Link to={`/product/${props.product.id}`}>
               <img
-                src={props.product.productImages[0]?.url}
+                src={
+                  props.product.productImages[0]?.url ||
+                  "https://placehold.co/600x400/EEE/31343C"
+                }
                 // style={{ borderRadius: "7%" }}
                 alt=""
                 className="w-100 mt-5 image-box"

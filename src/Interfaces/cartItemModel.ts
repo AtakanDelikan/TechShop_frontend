@@ -1,8 +1,8 @@
-import laptopModel from "./laptopModel";
+import productModel from "./productModel";
 
 export default interface cartItemModel {
   id?: number;
-  laptopId?: number;
-  laptop?: laptopModel;
+  productId?: number;
+  product?: productModel;
   quantity?: number;
 }

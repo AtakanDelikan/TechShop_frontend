@@ -22,8 +22,6 @@ function SideBarFilter(props: Props) {
     setSelectedFilters((prev) => ({ ...prev, [attributeId]: values }));
   }
 
-  // console.log(selectedFilters);
-
   return (
     <div
       className="bg-light p-3 overflow-auto flex-shrink-0"

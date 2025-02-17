@@ -28,13 +28,13 @@ function CartSummary() {
     updateQuantityBy: number,
     cartItem: cartItemModel
   ) => {
-    if (
-      (updateQuantityBy === -1 && cartItem.quantity === 1) ||
-      updateQuantityBy === 0
-    ) {
+    if (updateQuantityBy === -1 && cartItem.quantity === 1) {
+      return;
+    }
+    if (updateQuantityBy === 0) {
       //remove the item
       updateShoppingCart({
-        laptopId: cartItem.laptop?.id,
+        productId: cartItem.product?.id,
         updateQuantityBy: 0,
         userId: userData.id,
       });
@@ -42,7 +42,7 @@ function CartSummary() {
     } else {
       //update the quantity
       updateShoppingCart({
-        laptopId: cartItem.laptop?.id,
+        productId: cartItem.product?.id,
         updateQuantityBy: updateQuantityBy,
         userId: userData.id,
       });
@@ -66,18 +66,25 @@ function CartSummary() {
           style={{ background: "ghostwhite" }}
         >
           <div className="p-3">
-            <img src={cartItem.laptop?.image} alt="" width={"120px"} />
+            <img
+              src={
+                cartItem.product?.productImages[0]?.url ||
+                "https://placehold.co/600x400/EEE/31343C"
+              }
+              alt=""
+              width={"120px"}
+            />
           </div>
 
           <div className="p-2 mx-3" style={{ width: "100%" }}>
             <div className="d-flex justify-content-between align-items-center">
-              <h4 style={{ fontWeight: 300 }}>{cartItem.laptop?.name}</h4>
+              <h4 style={{ fontWeight: 300 }}>{cartItem.product?.name}</h4>
               <h4>
-                €{(cartItem.quantity! * cartItem.laptop!.price).toFixed(2)}
+                €{(cartItem.quantity! * cartItem.product!.price).toFixed(2)}
               </h4>
             </div>
             <div className="flex-fill">
-              <h4 className="text-danger">€{cartItem.laptop!.price}</h4>
+              <h4 className="text-danger">€{cartItem.product!.price}</h4>
             </div>
             <div className="d-flex justify-content-between">
               <div

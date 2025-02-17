@@ -55,12 +55,12 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
       const orderDetailsDTO: any = [];
       data.cartItems?.forEach((item: cartItemModel) => {
         const tempOrderDetail: any = {};
-        tempOrderDetail["laptopId"] = item.laptop?.id;
+        tempOrderDetail["productId"] = item.product?.id;
         tempOrderDetail["quantity"] = item.quantity;
-        tempOrderDetail["itemName"] = item.laptop?.name;
-        tempOrderDetail["price"] = item.laptop?.price;
+        tempOrderDetail["itemName"] = item.product?.name;
+        tempOrderDetail["price"] = item.product?.price;
         orderDetailsDTO.push(tempOrderDetail);
-        grandTotal += item.quantity! * item.laptop?.price!;
+        grandTotal += item.quantity! * item.product?.price!;
         totalItems += item.quantity!;
       });
 
