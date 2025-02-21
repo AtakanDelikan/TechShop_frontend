@@ -11,6 +11,7 @@ import { useCreateOrderMutation } from "../../../Apis/orderApi";
 import { apiResponse } from "../../../Interfaces";
 import { SD_Status } from "../../../Utility/SD";
 import { useNavigate } from "react-router-dom";
+import { useDeleteShoppingCartMutation } from "../../../Apis/shoppingCartApi";
 
 const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
   const elements = useElements();
   const [createOrder] = useCreateOrderMutation();
   const [isProcessing, setIsProcessing] = useState(false);
+  const [deleteShoppingCart] = useDeleteShoppingCartMutation();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     // We don't want to let default form submission happen here,
@@ -81,6 +83,8 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
 
       if (response) {
         if (response.data?.result.status === SD_Status.CONFIRMED) {
+          deleteShoppingCart(data.id);
+          console.log(data.id);
           navigate(
             `/order/orderConfirmed/${response.data.result.orderHeaderId}`
           );
@@ -91,6 +95,7 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
     }
     setIsProcessing(false);
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <PaymentElement />

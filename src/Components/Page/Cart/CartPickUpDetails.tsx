@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import cartItemModel from "../../../Interfaces/cartItemModel";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../Storage/Redux/store";
-import { inputHelper } from "../../../Helper";
+import { inputHelper, toastNotify } from "../../../Helper";
 import { MiniLoader } from "../Common";
 import { useInitiatePaymentMutation } from "../../../Apis/paymentApi";
 import { useNavigate } from "react-router-dom";
@@ -48,6 +48,11 @@ function CartPickUpDetails() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (totalItems == 0) {
+      toastNotify("There is no items to your cart!", "error");
+      return;
+    }
+
     setLoading(true);
 
     const { data }: apiResponse = await initiatePayment(userData.id);

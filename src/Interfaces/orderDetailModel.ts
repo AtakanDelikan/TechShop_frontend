@@ -1,10 +1,10 @@
-import laptopModel from "./laptopModel";
+import productModel from "./productModel";
 
 export default interface orderDetailModel {
   orderDetailId?: number;
   orderHeaderId?: number;
-  laptopId?: number;
-  laptop?: laptopModel;
+  productId?: number;
+  product?: productModel;
   quantity?: number;
   itemName?: string;
   price?: number;
