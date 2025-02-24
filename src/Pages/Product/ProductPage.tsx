@@ -9,6 +9,7 @@ import { RootState } from "../../Storage/Redux/store";
 import { useUpdateShoppingCartMutation } from "../../Apis/shoppingCartApi";
 import { toastNotify } from "../../Helper";
 import {
+  ProductComments,
   ProductDetails,
   ProductImageDisplay,
 } from "../../Components/Page/Product";
@@ -124,9 +125,9 @@ function ProductPage() {
               />
             </div>
           </div>
-          <div>Comments</div>
         </div>
       </div>
+      <ProductComments product={data.result} />
     </>
   );
 }

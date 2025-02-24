@@ -7,6 +7,7 @@ import categoryApi from "./categoryApi";
 import categoryAttributeApi from "./categoryAttributeApi";
 import productApi from "./productApi";
 import productAttributeApi from "./productAttributeApi";
+import commentApi from "./CommentApi";
 
 export {
   laptopApi,
@@ -18,4 +19,5 @@ export {
   categoryAttributeApi,
   productApi,
   productAttributeApi,
+  commentApi,
 };
