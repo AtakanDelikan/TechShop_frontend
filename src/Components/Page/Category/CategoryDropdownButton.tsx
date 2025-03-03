@@ -4,17 +4,22 @@ import { categoryModel } from "../../../Interfaces";
 interface CategoryDropdownButtonProps {
   categories: categoryModel[];
   onSelect: any;
+  titleChange?: boolean;
 }
 
 const CategoryDropdownButton: React.FC<CategoryDropdownButtonProps> = ({
   categories,
   onSelect,
+  titleChange = true,
 }) => {
   const [selectedCategory, setSelectedCategory] =
     useState<categoryModel | null>(null);
 
   const handleSelect = (category: categoryModel) => {
-    setSelectedCategory(category);
+    if (titleChange) {
+      setSelectedCategory(category);
+    }
+
     onSelect(category);
   };
 

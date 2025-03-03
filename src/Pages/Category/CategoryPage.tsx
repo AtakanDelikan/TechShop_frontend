@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { MainLoader, RangeSelector } from "../../Components/Page/Common";
+import { MainLoader } from "../../Components/Page/Common";
 import { useGetCategoryAttributesByIdQuery } from "../../Apis/categoryAttributeApi";
 import NotFound from "../NotFound";
 import { SideBarFilter } from "../../Components/Page/Category";
@@ -15,9 +15,9 @@ function CategoryPage() {
   useEffect(() => {
     const categoryId = id ? id.toString() : "";
     setQueryParams(
-      "category=" + categoryId + "&" + "attributes=" + attributeQueryString
+      "category=" + categoryId + "&attributes=" + attributeQueryString
     );
-  }, [attributeQueryString]);
+  }, [attributeQueryString, id]);
 
   const { data, isLoading } = useGetCategoryAttributesByIdQuery(id);
   const { data: products, isLoading: isProductsLoading } =

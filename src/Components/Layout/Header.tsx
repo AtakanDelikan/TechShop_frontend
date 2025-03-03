@@ -3,18 +3,22 @@ import { NavLink, useNavigate } from "react-router-dom";
 import cartItemModel from "../../Interfaces/cartItemModel";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../Storage/Redux/store";
-import { userModel } from "../../Interfaces";
+import { categoryModel, userModel } from "../../Interfaces";
 import {
   emptyUserState,
   setLoggedInUser,
 } from "../../Storage/Redux/userAuthSlice";
 import { SD_Roles } from "../../Utility/SD";
+import { CategoryDropdownButton } from "../Page/Category";
+import { useGetCategoriesQuery } from "../../Apis/categoryApi";
+import { NavSearchBar } from "../../Pages";
 
 let logo = require("../../Assets/Images/techshop.png");
 
 function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { data, isLoading } = useGetCategoriesQuery(null);
 
   const shoppingCartFromStore: cartItemModel[] = useSelector(
     (state: RootState) => state.shoppingCartStore.cartItems ?? []
@@ -28,6 +32,10 @@ function Header() {
     localStorage.removeItem("token");
     dispatch(setLoggedInUser({ ...emptyUserState }));
     navigate("/");
+  };
+
+  const onCategorySelect = (category: categoryModel) => {
+    navigate("/category/" + category.id);
   };
 
   return (
@@ -55,7 +63,15 @@ function Header() {
                   Home
                 </NavLink>
               </li>
-              {userData.role == SD_Roles.ADMIN ? (
+              {!isLoading && (
+                <CategoryDropdownButton
+                  categories={data?.result}
+                  onSelect={onCategorySelect}
+                  titleChange={false}
+                />
+              )}
+
+              {userData.role === SD_Roles.ADMIN ? (
                 <li className="nav-item dropdown">
                   <a
                     className="nav-link dropdown-toggle"
@@ -125,6 +141,8 @@ function Header() {
                   {userData.id && ` (${shoppingCartFromStore.length})`}
                 </NavLink>
               </li>
+
+              <NavSearchBar />
 
               <div className="d-flex" style={{ marginLeft: "auto" }}>
                 {userData.id && (

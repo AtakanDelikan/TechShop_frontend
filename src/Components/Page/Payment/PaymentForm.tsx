@@ -84,7 +84,6 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
       if (response) {
         if (response.data?.result.status === SD_Status.CONFIRMED) {
           deleteShoppingCart(data.id);
-          console.log(data.id);
           navigate(
             `/order/orderConfirmed/${response.data.result.orderHeaderId}`
           );

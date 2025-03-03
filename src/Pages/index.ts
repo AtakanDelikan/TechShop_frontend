@@ -20,6 +20,7 @@ import ProductList from "./Product/ProductList";
 import ProductUpsert from "./Product/ProductUpsert";
 import ProductPage from "./Product/ProductPage";
 import CategoryPage from "./Category/CategoryPage";
+import NavSearchBar from "./NavSearchBar";
 
 export {
   Home,
@@ -44,4 +45,5 @@ export {
   ProductUpsert,
   ProductPage,
   CategoryPage,
+  NavSearchBar,
 };

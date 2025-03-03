@@ -39,8 +39,6 @@ function ProductComments(props: Props) {
     return <MiniLoader />;
   }
 
-  console.log(data);
-
   return (
     <div className="container">
       <div className="row m-2 p-2 justify-content-md-center">

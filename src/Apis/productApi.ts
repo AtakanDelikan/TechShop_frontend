@@ -6,6 +6,10 @@ const productApi = createApi({
   reducerPath: "productApi",
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
+    // prepareHeaders: (headers) => {
+    //   headers.set("Cache-Control", "no-cache, no-store, must-revalidate");
+    //   return headers;
+    // },
   }),
   tagTypes: ["Products"],
   endpoints: (builder) => ({
@@ -30,6 +34,12 @@ const productApi = createApi({
     getFilteredProducts: builder.query({
       query: (params) => ({
         url: `product/filter/?${params}`,
+      }),
+      providesTags: ["Products"],
+    }),
+    getSearchedProducts: builder.query({
+      query: (params) => ({
+        url: `product/search?${params}`,
       }),
       providesTags: ["Products"],
     }),
@@ -58,5 +68,6 @@ export const {
   useCreateProductMutation,
   useDeleteProductMutation,
   useGetFilteredProductsQuery,
+  useGetSearchedProductsQuery,
 } = productApi;
 export default productApi;
