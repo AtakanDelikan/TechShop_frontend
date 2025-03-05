@@ -82,7 +82,7 @@ function NavSearchBar() {
   };
 
   return (
-    <div ref={searchRef}>
+    <div ref={searchRef} className="ps-5">
       <form className="d-flex" onSubmit={handleSearchSubmit}>
         <div className="input-group" style={{ width: "400px" }}>
           <input

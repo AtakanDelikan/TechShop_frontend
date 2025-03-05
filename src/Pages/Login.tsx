@@ -39,7 +39,7 @@ function Login() {
       const { fullName, id, email, role }: userModel = jwtDecode(token);
       localStorage.setItem("token", token);
       dispatch(setLoggedInUser({ fullName, id, email, role }));
-      navigate("/");
+      navigate("/userPage");
     } else if (response.error) {
       setError(response.error.data.errorMessages[0]);
     }

@@ -6,7 +6,16 @@ const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+
+      return headers;
+    },
   }),
+  tagTypes: ["UserData"],
   endpoints: (builder) => ({
     registerUser: builder.mutation({
       query: (userData) => ({
@@ -28,8 +37,27 @@ const authApi = createApi({
         body: userCredentials,
       }),
     }),
+    getUserData: builder.query({
+      query: () => ({
+        url: "auth/userdata",
+      }),
+      providesTags: ["UserData"],
+    }),
+    updateUserData: builder.mutation({
+      query: (data) => ({
+        url: "auth/userdata",
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["UserData"],
+    }),
   }),
 });
 
-export const { useRegisterUserMutation, useLoginUserMutation } = authApi;
+export const {
+  useRegisterUserMutation,
+  useLoginUserMutation,
+  useGetUserDataQuery,
+  useUpdateUserDataMutation,
+} = authApi;
 export default authApi;

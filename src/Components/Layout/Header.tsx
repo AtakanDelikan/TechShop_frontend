@@ -71,7 +71,7 @@ function Header() {
                 />
               )}
 
-              {userData.role === SD_Roles.ADMIN ? (
+              {userData.role === SD_Roles.ADMIN && (
                 <li className="nav-item dropdown">
                   <a
                     className="nav-link dropdown-toggle"
@@ -83,11 +83,6 @@ function Header() {
                     Admin Panel
                   </a>
                   <ul className="dropdown-menu">
-                    <li>
-                      <NavLink className="dropdown-item" to="/order/myorders">
-                        My Orders
-                      </NavLink>
-                    </li>
                     <li>
                       <NavLink className="dropdown-item" to="/order/allOrders">
                         All Orders
@@ -119,16 +114,6 @@ function Header() {
                     </li>
                   </ul>
                 </li>
-              ) : (
-                <li className="nav-item">
-                  <NavLink
-                    className="nav-link"
-                    aria-current="page"
-                    to="/order/myorders"
-                  >
-                    Orders
-                  </NavLink>
-                </li>
               )}
 
               <li className="nav-item">
@@ -158,6 +143,21 @@ function Header() {
                       >
                         Welcome, {userData.fullName}
                       </button>
+                    </li>
+
+                    <li className="nav-item text-white">
+                      <NavLink
+                        className="btn btn-success btn-outlined rounded-pill text-white mx-2"
+                        style={{
+                          border: "none",
+                          height: "40px",
+                          width: "120px",
+                        }}
+                        to="/userPage"
+                      >
+                        Account
+                        <i className="bi bi-person"></i>
+                      </NavLink>
                     </li>
 
                     <li className="nav-item pt-a">
