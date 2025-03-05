@@ -24,6 +24,7 @@ import {
   ShoppingCart,
   CategoryPage,
   UserPage,
+  ProductSearch,
 } from "../Pages";
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
@@ -123,6 +124,7 @@ function App() {
           ></Route>
           <Route path="/product/:id" element={<ProductPage />}></Route>
           <Route path="/userPage" element={<UserPage />}></Route>
+          <Route path="/search" element={<ProductSearch />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>

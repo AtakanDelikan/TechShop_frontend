@@ -16,8 +16,6 @@ function OrderSection() {
     return <MiniLoader />;
   }
 
-  console.log(data);
-
   return (
     <div className="card mb-4">
       <div className="card-header">Order History</div>

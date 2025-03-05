@@ -22,6 +22,7 @@ import ProductPage from "./Product/ProductPage";
 import CategoryPage from "./Category/CategoryPage";
 import NavSearchBar from "./NavSearchBar";
 import UserPage from "./UserPage";
+import ProductSearch from "./Product/ProductSearch";
 
 export {
   Home,
@@ -48,4 +49,5 @@ export {
   CategoryPage,
   NavSearchBar,
   UserPage,
+  ProductSearch,
 };

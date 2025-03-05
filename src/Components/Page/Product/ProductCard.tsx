@@ -52,7 +52,7 @@ function ProductCard(props: Props) {
             <Link to={`/product/${props.product.id}`}>
               <img
                 src={
-                  props.product.productImages[0]?.url ||
+                  props.product.productImages?.[0]?.url ||
                   "https://placehold.co/600x400/EEE/31343C"
                 }
                 // style={{ borderRadius: "7%" }}
