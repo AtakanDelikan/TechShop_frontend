@@ -24,12 +24,14 @@ function ProductAttributeForm(props: Props) {
 
   useEffect(() => {
     if (!isLoading) {
-      const attributes: attributeModel[] = data?.result?.map((item: any) => ({
-        id: item.id, // Convert id to string if needed .toString()
-        name: item.attributeName,
-        dataType: item.dataType, // Use the same dataType
-        value: "", // Set value as an empty string
-      }));
+      const attributes: attributeModel[] = data?.result?.attributes?.map(
+        (item: any) => ({
+          id: item.id, // Convert id to string if needed .toString()
+          name: item.attributeName,
+          dataType: item.dataType, // Use the same dataType
+          value: "", // Set value as an empty string
+        })
+      );
       if (attributes === undefined) {
         props.setAttribute([testAttribute]);
       } else {
@@ -129,7 +131,7 @@ function ProductAttributeForm(props: Props) {
   return (
     <>
       <div>
-        {data?.result.length > 0 && (
+        {data?.result?.attributes?.length > 0 && (
           <>
             <div className="row justify-content-md-center mt-3">
               <div className="border">

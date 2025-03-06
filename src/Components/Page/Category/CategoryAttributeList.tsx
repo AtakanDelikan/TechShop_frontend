@@ -17,7 +17,7 @@ function CategoryAttributeList(props: Props) {
   return (
     <>
       <div>
-        {data?.result.length > 0 && (
+        {data?.result?.attributes?.length > 0 && (
           <>
             <div className="row justify-content-md-center mt-3">
               <div className="col-6 border">
@@ -27,7 +27,7 @@ function CategoryAttributeList(props: Props) {
                 </div>
               </div>
             </div>
-            {data.result.map((attribute: any) => (
+            {data?.result?.attributes?.map((attribute: any) => (
               <div className="row justify-content-md-center" key={attribute.id}>
                 <div className="col-6 border">
                   <div className="row p-1">

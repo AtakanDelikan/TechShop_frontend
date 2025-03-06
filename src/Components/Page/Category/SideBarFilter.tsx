@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BooleanSelector, RangeSelector, StringSelector } from "../Common";
 
 interface Props {
-  attributes: any;
+  data: any;
   setAttributeQueryString: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -11,16 +11,30 @@ function SideBarFilter(props: Props) {
     [key: number]: string[];
   }>({});
 
-  const attributeQueryString = Object.entries(selectedFilters)
-    .filter(([_, values]) => values.length > 0) // Exclude entries with empty values
-    .map(([attributeId, values]) => `${attributeId}[${values.join("﹐")}]`)
-    .join(";");
+  const [priceQuery, setPriceQuery] = useState<string>("");
+
+  const attributeQueryString =
+    Object.entries(selectedFilters)
+      .filter(([_, values]) => values.length > 0) // Exclude entries with empty values
+      .map(([attributeId, values]) => `${attributeId}[${values.join("﹐")}]`)
+      .join(";") + priceQuery;
 
   props.setAttributeQueryString(attributeQueryString);
 
   function handleSelectionChange(attributeId: number, values: string[]) {
     setSelectedFilters((prev) => ({ ...prev, [attributeId]: values }));
   }
+
+  function handlePriceChange(values: string[]) {
+    setPriceQuery("&price=" + values[0] + "﹐" + values[1]);
+  }
+
+  const priceAttribute = {
+    min: 0,
+    max: props.data.maxPrice,
+    dataType: 3,
+    attributeName: "Price",
+  };
 
   return (
     <div
@@ -43,7 +57,13 @@ function SideBarFilter(props: Props) {
           paddingBottom: "60px",
         }}
       >
-        {props.attributes.map((attribute: any) => {
+        <div key={0} className="mb-5">
+          <RangeSelector
+            attribute={priceAttribute}
+            onSelectionChange={handlePriceChange}
+          />
+        </div>
+        {props.data.attributes.map((attribute: any) => {
           switch (attribute.dataType) {
             case 1:
               return (

@@ -17,8 +17,6 @@ function ProfileSection() {
     address: "",
   });
 
-  console.log(data);
-
   // Load initial data when available
   React.useEffect(() => {
     if (data?.result) {
