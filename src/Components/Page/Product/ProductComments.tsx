@@ -8,6 +8,7 @@ import {
 } from "../../../Apis/CommentApi";
 import { MiniLoader } from "../Common";
 import { useSelector } from "react-redux";
+import { toastNotify } from "../../../Helper";
 
 interface Props {
   product: any;
@@ -29,10 +30,21 @@ function ProductComments(props: Props) {
       productId: props.product.id,
       rating: rating,
     });
+    console.log(response);
+    if (response.data?.isSuccess) {
+      toastNotify("Posted your comment", "success");
+    } else if (response.error?.status === 401) {
+      toastNotify("You must be logged in to post comment!", "error");
+    }
   };
 
   const handleDeleteComment = async (commentId: number) => {
     const response: apiResponse = await removeComment(commentId);
+    if (response.data?.isSuccess) {
+      toastNotify("Deleted your comment", "success");
+    } else if (response.error) {
+      toastNotify("Error occured deleting your comment!", "error");
+    }
   };
 
   if (isLoading) {
@@ -44,6 +56,12 @@ function ProductComments(props: Props) {
       <div className="row m-2 p-2 justify-content-md-center">
         <div className="col-8">
           <h4 className="mt-5 text-center">Comments</h4>
+          <p>
+            <strong>Average Rating</strong> - ⭐{" "}
+            {props.product?.rating?.toFixed(2)}
+            /5
+          </p>
+
           <div className="d-flex justify-content-end">
             <button
               className="btn btn-primary"

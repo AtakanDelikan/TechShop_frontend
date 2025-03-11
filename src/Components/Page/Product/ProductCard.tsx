@@ -75,7 +75,7 @@ function ProductCard(props: Props) {
                 cursor: "pointer",
               }}
             >
-              &nbsp; Add to Favorite
+              &nbsp; Rating {props.product.rating?.toFixed(2)}
             </i>
           )}
 
@@ -101,7 +101,7 @@ function ProductCard(props: Props) {
                 outline: "none !important",
                 cursor: "pointer",
               }}
-              onClick={() => handleAddToCart(props.product.id)} //TODO make this work
+              onClick={() => handleAddToCart(props.product.id)}
             ></i>
           )}
 

@@ -75,7 +75,10 @@ function ProductList() {
             <div className="row border" key={product.id}>
               <div className="col-2">
                 <img
-                  src={product.images && product.images[0]}
+                  src={
+                    (product.images && product.images[0]) ||
+                    "https://placehold.co/600x400/EEE/31343C"
+                  }
                   alt="no content"
                   style={{ width: "100%", maxWidth: "120px" }}
                 />
