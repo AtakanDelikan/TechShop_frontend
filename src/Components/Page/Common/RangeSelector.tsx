@@ -1,5 +1,5 @@
 import { Box, Slider } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface Props {
   attribute: any;
@@ -11,6 +11,10 @@ function RangeSelector(props: Props) {
     props.attribute.min,
     props.attribute.max,
   ]);
+
+  useEffect(() => {
+    setValues([props.attribute.min, props.attribute.max]);
+  }, [props.attribute.min, props.attribute.max]);
 
   const step = props.attribute?.dataType === 3 ? 0.1 : 1;
 
