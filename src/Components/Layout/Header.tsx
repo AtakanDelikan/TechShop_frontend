@@ -112,6 +112,11 @@ function Header() {
                         Products
                       </NavLink>
                     </li>
+                    <li>
+                      <NavLink className="dropdown-item" to="/bulkImport">
+                        Bulk Import
+                      </NavLink>
+                    </li>
                   </ul>
                 </li>
               )}

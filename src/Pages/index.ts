@@ -23,6 +23,7 @@ import CategoryPage from "./Category/CategoryPage";
 import NavSearchBar from "./NavSearchBar";
 import UserPage from "./UserPage";
 import ProductSearch from "./Product/ProductSearch";
+import BulkImport from "./BulkImport";
 
 export {
   Home,
@@ -50,4 +51,5 @@ export {
   NavSearchBar,
   UserPage,
   ProductSearch,
+  BulkImport,
 };

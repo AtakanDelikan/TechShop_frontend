@@ -8,6 +8,7 @@ import categoryAttributeApi from "./categoryAttributeApi";
 import productApi from "./productApi";
 import productAttributeApi from "./productAttributeApi";
 import commentApi from "./CommentApi";
+import bulkImportApi from "./bulkImportApi";
 
 export {
   laptopApi,
@@ -20,4 +21,5 @@ export {
   productApi,
   productAttributeApi,
   commentApi,
+  bulkImportApi,
 };
