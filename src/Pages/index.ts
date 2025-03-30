@@ -24,6 +24,7 @@ import NavSearchBar from "./NavSearchBar";
 import UserPage from "./UserPage";
 import ProductSearch from "./Product/ProductSearch";
 import BulkImport from "./BulkImport";
+import SalesAnalytics from "./SalesAnalytics";
 
 export {
   Home,
@@ -52,4 +53,5 @@ export {
   UserPage,
   ProductSearch,
   BulkImport,
+  SalesAnalytics,
 };

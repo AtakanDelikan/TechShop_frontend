@@ -26,6 +26,7 @@ import {
   UserPage,
   ProductSearch,
   BulkImport,
+  SalesAnalytics,
 } from "../Pages";
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
@@ -127,6 +128,7 @@ function App() {
           <Route path="/userPage" element={<UserPage />}></Route>
           <Route path="/search" element={<ProductSearch />}></Route>
           <Route path="/bulkImport" element={<BulkImport />}></Route>
+          <Route path="/salesAnalytics" element={<SalesAnalytics />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>
