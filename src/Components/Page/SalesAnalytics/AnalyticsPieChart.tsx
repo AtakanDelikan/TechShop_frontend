@@ -26,8 +26,8 @@ interface LabelProps {
 }
 
 // Custom Label Function to Show Name, Value, and Percentage
-const renderLabel = ({ name, value, percent }: LabelProps): string => {
-  return `${name}: ${value} (${(percent * 100).toFixed(0)}%)`;
+const renderLabel = ({ name, percent }: LabelProps): string => {
+  return `${name}: (${(percent * 100).toFixed(0)}%)`;
 };
 
 interface Props {
