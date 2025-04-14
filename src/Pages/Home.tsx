@@ -1,13 +1,11 @@
 import React from "react";
-import { LaptopList } from "../Components/Page/Laptops";
+import { LiveDemoFeatures, ProjectOverview } from "../Components/Page/HomePage";
 
 function Home() {
   return (
-    <div>
-      <div className="container p-2">
-        <LaptopList />
-      </div>
-    </div>
+    <>
+      <ProjectOverview />
+    </>
   );
 }
 
