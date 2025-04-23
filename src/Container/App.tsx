@@ -121,6 +121,10 @@ function App() {
           <Route path="/category/:id" element={<CategoryPage />}></Route>
           <Route path="/product/productList" element={<ProductList />}></Route>
           <Route
+            path="/product/productUpsert/:id"
+            element={<ProductUpsert />}
+          ></Route>
+          <Route
             path="/product/productUpsert"
             element={<ProductUpsert />}
           ></Route>

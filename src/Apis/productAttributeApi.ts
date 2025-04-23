@@ -23,6 +23,14 @@ const productAttributeApi = createApi({
       }),
       invalidatesTags: ["ProductAttributes"],
     }),
+    updateProductAttribute: builder.mutation({
+      query: (data) => ({
+        url: "productAttribute",
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["ProductAttributes"],
+    }),
     deleteProductAttribute: builder.mutation({
       query: (id) => ({
         url: "productAttribute" + id,
@@ -36,6 +44,7 @@ const productAttributeApi = createApi({
 export const {
   useGetProductAttributesQuery,
   useCreateProductAttributeMutation,
+  useUpdateProductAttributeMutation,
   useDeleteProductAttributeMutation,
 } = productAttributeApi;
 export default productAttributeApi;

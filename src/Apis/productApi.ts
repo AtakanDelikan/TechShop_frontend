@@ -51,6 +51,14 @@ const productApi = createApi({
       }),
       invalidatesTags: ["Products"],
     }),
+    updateProduct: builder.mutation({
+      query: ({ data, id }) => ({
+        url: "product/" + id,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["Products"],
+    }),
     deleteProduct: builder.mutation({
       query: (id) => ({
         url: "product/" + id,
@@ -66,6 +74,7 @@ export const {
   useGetProductByIdQuery,
   useGetProductsByCategoryQuery,
   useCreateProductMutation,
+  useUpdateProductMutation,
   useDeleteProductMutation,
   useGetFilteredProductsQuery,
   useGetSearchedProductsQuery,

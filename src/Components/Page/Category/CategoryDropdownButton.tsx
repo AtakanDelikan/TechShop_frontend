@@ -5,12 +5,14 @@ interface CategoryDropdownButtonProps {
   categories: categoryModel[];
   onSelect: any;
   titleChange?: boolean;
+  disabled?: boolean;
 }
 
 const CategoryDropdownButton: React.FC<CategoryDropdownButtonProps> = ({
   categories,
   onSelect,
   titleChange = true,
+  disabled = false,
 }) => {
   const [selectedCategory, setSelectedCategory] =
     useState<categoryModel | null>(null);
@@ -61,6 +63,7 @@ const CategoryDropdownButton: React.FC<CategoryDropdownButtonProps> = ({
         id="categoryDropdown"
         data-bs-toggle="dropdown"
         aria-expanded="false"
+        disabled={disabled}
       >
         {selectedCategory?.name || "Select Category"}
       </button>

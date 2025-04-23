@@ -8,6 +8,7 @@ interface Props {
   category: categoryModel;
   setAttribute: (value: React.SetStateAction<attributeModel[]>) => void;
   attributes: attributeModel[];
+  productAttributes?: any[];
 }
 
 function ProductAttributeForm(props: Props) {
@@ -22,6 +23,18 @@ function ProductAttributeForm(props: Props) {
     value: "",
   };
 
+  const getAttributeValue = (categoryAttributeId: number) => {
+    if (props.productAttributes) {
+      const found = props.productAttributes.find(
+        (item) => item.categoryAttributeId === categoryAttributeId
+      );
+      return found ? found.value : ""; // returns "" if not found
+    }
+    return "";
+  };
+
+  console.log(props.productAttributes);
+
   useEffect(() => {
     if (!isLoading) {
       const attributes: attributeModel[] = data?.result?.attributes?.map(
@@ -29,7 +42,7 @@ function ProductAttributeForm(props: Props) {
           id: item.id, // Convert id to string if needed .toString()
           name: item.attributeName,
           dataType: item.dataType, // Use the same dataType
-          value: "", // Set value as an empty string
+          value: getAttributeValue(item.id), // Set value if updating product
         })
       );
       if (attributes === undefined) {
