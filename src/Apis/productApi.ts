@@ -26,8 +26,8 @@ const productApi = createApi({
       providesTags: ["Products"],
     }),
     getProductsByCategory: builder.query({
-      query: (id) => ({
-        url: `product/category/${id}`,
+      query: (params) => ({
+        url: `product/category/${params}`,
       }),
       providesTags: ["Products"],
     }),
