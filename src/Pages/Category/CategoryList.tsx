@@ -54,13 +54,15 @@ function CategoryList() {
                   style={{ padding: "0rem 0.2rem" }}
                   onClick={() => handleDelete(category.id)}
                 >
-                  <i className="bi bi-x"></i>
+                  <i className="bi bi-trash"></i>
                 </button>
                 <button
                   type="button"
                   className="btn btn-success btn-sm"
                   style={{ padding: "0rem 0.2rem" }}
-                  onClick={() => toastNotify("Not implemented yet!", "error")}
+                  onClick={() =>
+                    navigate(`/category/categoryUpsert/${category.id}`)
+                  }
                 >
                   <i className="bi bi-pencil-fill"></i>
                 </button>
@@ -128,7 +130,7 @@ function CategoryList() {
               </span>
               <button
                 className="btn btn-success position-absolute top-0 end-0"
-                onClick={() => navigate("/category/categoryCreate")}
+                onClick={() => navigate("/category/categoryUpsert")}
               >
                 Add New
               </button>

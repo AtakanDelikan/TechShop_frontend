@@ -1,16 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CategoryDropdownButton } from "../../Components/Page/Category";
 import { apiResponse, categoryModel } from "../../Interfaces";
 import { MainLoader } from "../../Components/Page/Common";
 import {
   useCreateCategoryMutation,
   useGetCategoriesQuery,
+  useGetCategoryByIdQuery,
+  useUpdateCategoryMutation,
 } from "../../Apis/categoryApi";
 import { inputHelper, toastNotify } from "../../Helper";
+import { useNavigate, useParams } from "react-router-dom";
+import NotFound from "../NotFound";
 
-const CategoryCreate = () => {
+const CategoryUpsert = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const { data: categoryData, isLoading: isCategoryLoading } =
+    useGetCategoryByIdQuery(id);
+
   const { data, isLoading } = useGetCategoriesQuery(null);
   const [createCategory] = useCreateCategoryMutation();
+  const [updateCategory] = useUpdateCategoryMutation();
 
   const [loading, setLoading] = useState(false);
   const [userInput, setUserInput] = useState({
@@ -24,6 +34,23 @@ const CategoryCreate = () => {
     subCategories: [],
   };
   const [parentCategory, setParentCategory] = useState(rootCategory);
+
+  useEffect(() => {
+    if (data && categoryData && categoryData.result) {
+      const tempData = {
+        name: categoryData.result.name,
+        description: categoryData.result.description,
+      };
+      setUserInput(tempData);
+      const tempCategory: categoryModel = {
+        id: categoryData.result.parentCategoryId,
+        name: categoryData.result.parentCategory.name, //categoryData.result.parentCategory.name,
+        subCategories: [],
+      };
+      setParentCategory(tempCategory);
+    }
+  }, [categoryData, data]);
+
   if (isLoading) {
     return <MainLoader />;
   }
@@ -32,14 +59,28 @@ const CategoryCreate = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    const response: apiResponse = await createCategory({
+
+    var response: apiResponse;
+
+    const category = {
       name: userInput.name,
       description: userInput.description,
       parentCategoryId: parentCategory.id,
-    });
+    };
 
-    if (response.data) {
+    if (id) {
+      response = await updateCategory({
+        data: category,
+        id: id,
+      });
+    } else {
+      response = await createCategory(category);
+    }
+
+    if (response.data && !id) {
       toastNotify("Category created successfully!");
+    } else if (response.data && id) {
+      toastNotify("Category updated successfully!");
     } else if (response.error) {
       toastNotify("There has been some error!", "error");
     }
@@ -54,10 +95,17 @@ const CategoryCreate = () => {
     setUserInput(tempData);
   };
 
+  // if id is given but no product is found
+  if (id && !isCategoryLoading && !categoryData) {
+    return <NotFound />;
+  }
+
   return (
     <div className="container text-center">
       <form method="post" onSubmit={handleSubmit}>
-        <h1 className="mt-5">Create New Category</h1>
+        <h1 className="mt-5">
+          {id ? `Update Category #${id}` : "Create New Category"}
+        </h1>
         <div className="mt-5">
           <div className="col-sm-6 offset-sm-3 col-xs-12 mt-4">
             <input
@@ -85,12 +133,27 @@ const CategoryCreate = () => {
             <CategoryDropdownButton
               categories={updatedCategories}
               onSelect={setParentCategory}
+              initialTitle={
+                categoryData?.result
+                  ? categoryData.result.parentCategory.name ?? "No Parent"
+                  : undefined
+              }
             />
           </div>
         </div>
         <div className="mt-5">
-          <button type="submit" className="btn btn-success" disabled={loading}>
-            Create
+          <button
+            type="submit"
+            className="btn btn-success  m-5"
+            disabled={loading}
+          >
+            {id ? "Update" : "Create"}
+          </button>
+          <button
+            onClick={() => navigate("/category/categoryList")}
+            className="btn btn-primary"
+          >
+            Back to Category List
           </button>
         </div>
       </form>
@@ -98,4 +161,4 @@ const CategoryCreate = () => {
   );
 };
 
-export default CategoryCreate;
+export default CategoryUpsert;

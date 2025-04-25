@@ -33,7 +33,7 @@ const productAttributeApi = createApi({
     }),
     deleteProductAttribute: builder.mutation({
       query: (id) => ({
-        url: "productAttribute" + id,
+        url: "productAttribute/" + id,
         method: "DELETE",
       }),
       invalidatesTags: ["ProductAttributes"],

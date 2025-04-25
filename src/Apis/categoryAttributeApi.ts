@@ -29,9 +29,17 @@ const categoryAttributeApi = createApi({
       }),
       invalidatesTags: ["CategoryAttributes"],
     }),
+    updateCategoryAttribute: builder.mutation({
+      query: ({ data, id }) => ({
+        url: "categoryAttribute/" + id,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["CategoryAttributes"],
+    }),
     deleteCategoryAttribute: builder.mutation({
       query: (id) => ({
-        url: "categoryAttribute" + id,
+        url: "categoryAttribute/" + id,
         method: "DELETE",
       }),
       invalidatesTags: ["CategoryAttributes"],
@@ -42,6 +50,7 @@ const categoryAttributeApi = createApi({
 export const {
   useGetCategoryAttributesQuery,
   useCreateCategoryAttributeMutation,
+  useUpdateCategoryAttributeMutation,
   useDeleteCategoryAttributeMutation,
   useGetCategoryAttributesByIdQuery,
 } = categoryAttributeApi;

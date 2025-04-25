@@ -27,6 +27,7 @@ import {
   ProductSearch,
   BulkImport,
   SalesAnalytics,
+  CategoryUpsert,
 } from "../Pages";
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
@@ -37,7 +38,6 @@ import { jwtDecode } from "jwt-decode";
 import { userModel } from "../Interfaces";
 import { setLoggedInUser } from "../Storage/Redux/userAuthSlice";
 import { RootState } from "../Storage/Redux/store";
-import CategoryCreate from "../Pages/Category/CategoryCreate";
 
 function App() {
   const dispatch = useDispatch();
@@ -107,8 +107,12 @@ function App() {
             element={<CategoryList />}
           ></Route>
           <Route
-            path="/category/categorycreate"
-            element={<CategoryCreate />}
+            path="/category/categoryUpsert/:id"
+            element={<CategoryUpsert />}
+          ></Route>
+          <Route
+            path="/category/categoryUpsert"
+            element={<CategoryUpsert />}
           ></Route>
           <Route
             path="/category/categoryAttributes"

@@ -16,6 +16,7 @@ import LaptopList from "./Laptop/LaptopList";
 import LaptopUpsert from "./Laptop/LaptopUpsert";
 import CategoryList from "./Category/CategoryList";
 import CategoryAttributes from "./Category/CategoryAttributes";
+import CategoryUpsert from "./Category/CategoryUpsert";
 import ProductList from "./Product/ProductList";
 import ProductUpsert from "./Product/ProductUpsert";
 import ProductPage from "./Product/ProductPage";
@@ -45,6 +46,7 @@ export {
   LaptopUpsert,
   CategoryList,
   CategoryAttributes,
+  CategoryUpsert,
   ProductList,
   ProductUpsert,
   ProductPage,

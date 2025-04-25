@@ -165,11 +165,6 @@ function ProductUpsert() {
     setUserInput(tempData);
   };
 
-  const handleGoBack = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    navigate("/product/productList");
-  };
-
   // if id is given but no product is found
   if (id && !isProductLoading && !productData) {
     return <NotFound />;
@@ -251,7 +246,10 @@ function ProductUpsert() {
           >
             {id ? "Update" : "Create"}
           </button>
-          <button onClick={handleGoBack} className="btn btn-primary">
+          <button
+            onClick={() => navigate("/product/productList")}
+            className="btn btn-primary"
+          >
             Back to Product List
           </button>
         </div>

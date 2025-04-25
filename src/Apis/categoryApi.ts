@@ -15,6 +15,12 @@ const categoryApi = createApi({
       }),
       providesTags: ["Categories"],
     }),
+    getCategoryById: builder.query({
+      query: (id) => ({
+        url: "category/" + id,
+      }),
+      providesTags: ["Categories"],
+    }),
     getSearchedCategories: builder.query({
       query: (params) => ({
         url: `category/search?${params}`,
@@ -25,6 +31,14 @@ const categoryApi = createApi({
       query: (data) => ({
         url: "category",
         method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Categories"],
+    }),
+    updateCategory: builder.mutation({
+      query: ({ data, id }) => ({
+        url: "category/" + id,
+        method: "PUT",
         body: data,
       }),
       invalidatesTags: ["Categories"],
@@ -41,7 +55,9 @@ const categoryApi = createApi({
 
 export const {
   useGetCategoriesQuery,
+  useGetCategoryByIdQuery,
   useCreateCategoryMutation,
+  useUpdateCategoryMutation,
   useDeleteCategoryMutation,
   useGetSearchedCategoriesQuery,
 } = categoryApi;
