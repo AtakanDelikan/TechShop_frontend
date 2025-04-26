@@ -1,46 +1,89 @@
-# Getting Started with Create React App
+# 🛒 TechShop Frontend (React + TypeScript)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the frontend application of a full-stack e-commerce platform built with **React**, **TypeScript**, and **Bootstrap 5**. It allows users to browse, filter, and purchase products. Admins can manage the product catalog and perform bulk data imports via the backend dashboard.
 
-## Available Scripts
+> 👉 [Backend Repository](https://github.com/AtakanDelikan/TechShop_API)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🔗 Live Demo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- 🌍 **Live Site**: [Hosted on Azure](https://tech-shop.azurewebsites.net/)
+- 👤 **Demo Credentials**:
+  - **Admin**: `admin / 12345`
+  - Or register as a customer or admin
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `npm test`
+## 🧠 Overview
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This frontend client communicates with a .NET backend through REST APIs. It supports dynamic filtering, user authentication, Stripe payments, admin-only features, and a clean responsive design.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🧰 Tech Stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| Role           | Technology                   |
+| -------------- | ---------------------------- |
+| Frontend       | React 18 + TypeScript        |
+| Styling        | Bootstrap 5, Material UI     |
+| Routing        | React Router DOM             |
+| HTTP Client    | RTK Query                    |
+| State Handling | Redux                        |
+| Charts         | Recharts                     |
+| Icons          | Bootstrap Icons              |
+| Auth           | JWT (stored in localStorage) |
+| Payments       | Stripe test integration      |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## ✨ Features
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 🛍 User Features
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Browse categories and products
+- Search by keyword
+- Filter products by category-specific attributes
+- Add/remove items from cart
+- View product details, rating, and price
+- Add review for products
+- Secure checkout with Stripe test card
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 🔐 Authentication
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Register and login as **Admin** or **Customer**
+- Role-based protected routes
+- Session stored via token in `localStorage`
 
-## Learn More
+### 🧮 Admin Features
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Bulk CSV import for:
+  - Categories
+  - Category Attributes
+  - Products
+- Manage catalog
+- View sales analytics from backend dashboard
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 💳 Stripe Integration
+
+- Use Stripe’s demo card for test checkout:
+  - **Card Number**: `4242 4242 4242 4242`
+  - **Date**: Any future expiry
+  - **CVC**: Any 3 digits
+
+---
+
+## 🗂 Folder Structure
+
+```bash
+src/
+├── Apis/               # API request functions
+├── Components/         # Reusable components (navbar, cards, etc.)
+├── Container/App.tsx   # Main application component
+├── Helper/             # Various helper functions (input, notification, etc.)
+├── HOC/                # Higher-order components
+├── Interfaces/         # Typescript interfaces
+├── Pages/              # Page-level views (Home, Cart, Admin)
+├── Storage/            # Redux storage
+└── Utility/            # Various static definitions
+```
