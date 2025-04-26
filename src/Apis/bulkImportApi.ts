@@ -6,6 +6,14 @@ const bulkImportApi = createApi({
   reducerPath: "bulkImportApi",
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
     bulkImportCategories: builder.mutation({

@@ -6,10 +6,14 @@ const productApi = createApi({
   reducerPath: "productApi",
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
-    // prepareHeaders: (headers) => {
-    //   headers.set("Cache-Control", "no-cache, no-store, must-revalidate");
-    //   return headers;
-    // },
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+      // headers.set("Cache-Control", "no-cache, no-store, must-revalidate");
+      return headers;
+    },
   }),
   tagTypes: ["Products"],
   endpoints: (builder) => ({
