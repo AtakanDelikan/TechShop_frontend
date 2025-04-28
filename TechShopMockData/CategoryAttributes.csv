@@ -1,0 +1,139 @@
+CategoryName,AttributeName,DataType
+Personal computers,Brand,string
+Personal computers,Processor,string
+Personal computers,Operating System,string
+Personal computers,GPU,string
+Personal computers,RAM (GB),integer
+Personal computers,Storage (GB),integer
+Personal computers,Wifi,boolean
+Laptops,Brand,string
+Laptops,Processor,string
+Laptops,Operating System,string
+Laptops,GPU,string
+Laptops,RAM (GB),integer
+Laptops,Storage (GB),integer
+Laptops,Screen size (inches),decimal
+Laptops,Resolution,string
+Laptops,Refresh rate (Hz),integer
+Laptops,Touch screen,boolean
+Monitors,Brand,string
+Monitors,Screen size (inches),decimal
+Monitors,Resolution,string
+Monitors,Refresh rate (Hz),integer
+Monitors,Panel type,string
+Monitors,Touch screen,boolean
+Monitors,Brightness (cd/m2),integer
+Monitors,Response time (ms),integer
+Keyboards,Brand,string
+Keyboards,Connector type,string
+Keyboards,Wireless,boolean
+Keyboards,Layout,string
+Keyboards,Cord length (m),decimal
+Keyboards,Backlight,boolean
+Mice,Brand,string
+Mice,Connector type,string
+Mice,Wireless,boolean
+Mice,Cord length (m),decimal
+Mice,DPI,integer
+Mice,Weight (g),integer
+Webcams,Brand,string
+Webcams,Resolution,string
+Webcams,Connector type,string
+Webcams,Cord length (m),decimal
+Headphones,Brand,string
+Headphones,Connector type,string
+Headphones,Cord length (m),decimal
+Headphones,Style,string
+Headphones,Noise cancelling,boolean
+Processors,Brand,string
+Processors,Socket,string
+Processors,CPU speed (GHz),decimal
+Processors,Number of cores,integer
+Processors,Number of threads,integer
+Processors,Integrated graphics,boolean
+Motherboards,Brand,string
+Motherboards,Form factor,string
+Motherboards,Socket,string
+Motherboards,Chipset,string
+Motherboards,Number of RAM slots,integer
+Motherboards,Supported memory type,string
+Motherboards,Integrated Wifi,boolean
+Graphics cards,Brand,string
+Graphics cards,Chipset,string
+Graphics cards,VRAM size (GB),integer
+Graphics cards,VRAM type,string
+RAMs,Brand,string
+RAMs,Type,string
+RAMs,Capacity (GB),integer
+RAMs,Form factor,string
+RAMs,Speed (MHz),integer
+RAMs,Latency (CL),integer
+Internal drives,Brand,string
+Internal drives,Capacity (GB),integer
+Internal drives,Read speed (MBps),integer
+Internal drives,Write speed (MBps),integer
+Internal drives,Connection type,string
+Internal drives,Form factor,string
+PSUs,Brand,string
+PSUs,Wattage,integer
+PSUs,Form factor,string
+PSUs,Efficiency rating,string
+Cases,Brand,string
+Cases,Case type,string
+Cases,Maximum GPU length (mm),integer
+Cases,Maximum CPU cooler length (mm),integer
+Cases,Material,string
+Coolers,Brand,string
+Coolers,Rated power (TDP),integer
+Coolers,Cooler Height (mm),integer
+Coolers,Supported CPU socket,string
+Coolers,Fan diameter (mm),integer
+Phones,Brand,string
+Phones,Size (inches),decimal
+Phones,Storage (GB),integer
+Phones,RAM (GB),integer
+Phones,Battery (mAh),integer
+Phones,Resolution,string
+Phones,Weight (g),integer
+Phones,Headphone jack,boolean
+Phones,Network type,string
+Tablets,Brand,string
+Tablets,Size (inches),decimal
+Tablets,Storage (GB),integer
+Tablets,RAM (GB),integer
+Tablets,Battery (mAh),integer
+Tablets,Resolution,string
+Tablets,Weight (g),integer
+Tablets,Headphone jack,boolean
+Tablets,Network type,string
+Smartwatches,Brand,string
+Smartwatches,Battery life (h),integer
+Smartwatches,Screen size (inches),decimal
+Smartwatches,SIM,boolean
+Digital cameras,Brand,string
+Digital cameras,Resolution (MP),decimal
+Digital cameras,Video resolution,string
+Digital cameras,Minimum ISO,integer
+Digital cameras,Maximum ISO,integer
+Instant cameras,Brand,string
+Instant cameras,Film developing time (s),integer
+Instant cameras,Weight (g),integer
+Instant cameras,Min shooting range (m),decimal
+TVs,Brand,string
+TVs,Screen size (inches),decimal
+TVs,Resolution,string
+TVs,Refresh rate (Hz),integer
+TVs,Panel type,string
+TVs,Brightness (cd/m2),integer
+TVs,Response time (ms),integer
+Gaming consoles,Brand,string
+Gaming consoles,Handheld,boolean
+Gaming consoles,Storage (GB),integer
+Gaming consoles,Resolution,string
+Gaming consoles,CPU,string
+Gaming consoles,GPU,string
+Gaming consoles,Release Year,integer
+Gaming chairs,Brand,string
+Gaming chairs,User weight max (kg),integer
+Gaming chairs,User height (cm),integer
+Gaming chairs,Material,string

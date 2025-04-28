@@ -1,0 +1,30 @@
+Name,Parent,Description
+Computers and accessories,,"Devices and peripherals essential for computing, including desktops, laptops, and add-ons."
+Personal computers,Computers and accessories,Standalone computing devices for personal or professional use.
+Laptops,Computers and accessories,Portable computers designed for convenience and mobility.
+Monitors,Computers and accessories,Screens used for displaying visuals from computers and other devices.
+Accessories,Computers and accessories,"Additional peripherals such as cables, adapters, and stands for computers."
+Keyboards,Accessories,Input devices for typing and controlling a computer.
+Mice,Accessories,Pointing devices used to navigate and interact with a computer.
+Webcams,Accessories,"Cameras designed for video calls, streaming, and recording."
+Headphones,Accessories,Audio devices worn over or in the ears for private listening.
+PC components,,Hardware parts that make up a computer system.
+Processors,PC components,The central processing unit (CPU) that handles instructions and tasks.
+Motherboards,PC components,The main circuit board that connects and communicates with all computer components.
+Graphics cards,PC components,Hardware designed to render images and videos for display.
+RAMs,PC components,Memory modules that provide temporary storage for running applications.
+Internal drives,PC components,Storage devices such as SSDs and HDDs inside a computer.
+PSUs,PC components,Power supply units that provide electricity to computer components.
+Cases,PC components,Enclosures that house and protect computer hardware.
+Coolers,PC components,Devices used to regulate temperature and prevent overheating.
+Smart devices,,Electronics with internet connectivity and advanced capabilities.
+Phones,Smart devices,"Mobile communication devices for calls, messaging, and apps."
+Tablets,Smart devices,Touchscreen devices that offer computing capabilities in a portable form.
+Smartwatches,Smart devices,"Wearable devices with fitness tracking, notifications, and more."
+Cameras,,Devices for capturing photos and videos.
+Digital cameras,Cameras,Cameras that store images electronically without the use of film.
+Instant cameras,Cameras,Cameras that print photos immediately after capturing.
+Home and leisure,,Electronics and devices for entertainment and home convenience.
+TVs,Home and leisure,Large screen displays for watching video content.
+Gaming consoles,Home and leisure,Devices dedicated to playing video games.
+Gaming chairs,Home and leisure,Ergonomic chairs designed for gaming comfort.
