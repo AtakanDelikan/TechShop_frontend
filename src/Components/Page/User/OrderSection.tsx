@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useGetAllOrdersQuery } from "../../../Apis/orderApi";
+import { useGetOrdersByUserIdQuery } from "../../../Apis/orderApi";
 import { RootState } from "../../../Storage/Redux/store";
 import { MiniLoader } from "../Common";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ import { getStatusColor } from "../../../Helper";
 
 function OrderSection() {
   const userId = useSelector((state: RootState) => state.userAuthStore.id);
-  const { data, isLoading } = useGetAllOrdersQuery(userId);
+  const { data, isLoading } = useGetOrdersByUserIdQuery(userId);
   const navigate = useNavigate();
 
   if (isLoading) {

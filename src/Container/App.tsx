@@ -8,11 +8,7 @@ import {
   CategoryAttributes,
   CategoryList,
   Home,
-  LaptopDetails,
-  LaptopList,
-  LaptopUpsert,
   Login,
-  MyOrders,
   NotFound,
   OrderConfirmed,
   OrderDetails,
@@ -69,10 +65,6 @@ function App() {
       <div style={{ marginBottom: "56px" }}>
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route
-            path="/laptopDetails/:laptopId"
-            element={<LaptopDetails />}
-          ></Route>
           <Route path="/shoppingCart" element={<ShoppingCart />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login" element={<Login />}></Route>
@@ -90,18 +82,11 @@ function App() {
             path="/order/orderconfirmed/:id"
             element={<OrderConfirmed />}
           ></Route>
-          <Route path="/order/myorders" element={<MyOrders />}></Route>
           <Route
             path="/order/orderDetails/:id"
             element={<OrderDetails />}
           ></Route>
           <Route path="/order/allOrders" element={<AllOrders />}></Route>
-          <Route path="/laptop/laptopList" element={<LaptopList />}></Route>
-          <Route
-            path="/laptop/laptopUpsert/:id"
-            element={<LaptopUpsert />}
-          ></Route>
-          <Route path="/laptop/laptopUpsert" element={<LaptopUpsert />}></Route>
           <Route
             path="/category/categorylist"
             element={<CategoryList />}

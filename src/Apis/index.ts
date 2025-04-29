@@ -1,4 +1,3 @@
-import laptopApi from "./LaptopApi";
 import shoppingCartApi from "./shoppingCartApi";
 import authApi from "./authApi";
 import paymentApi from "./paymentApi";
@@ -12,7 +11,6 @@ import bulkImportApi from "./bulkImportApi";
 import salesAnalyticsApi from "./salesAnalyticsApi";
 
 export {
-  laptopApi,
   shoppingCartApi,
   authApi,
   paymentApi,

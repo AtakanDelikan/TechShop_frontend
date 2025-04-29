@@ -8,7 +8,7 @@ This is the frontend application of a full-stack e-commerce platform built with 
 
 ## 🔗 Live Demo
 
-- 🌍 **Live Site**: [Hosted on Azure](https://tech-shop.azurewebsites.net/)
+- 🌍 **Live Site**: [Hosted on Azure](https://zealous-tree-0f2a87203.6.azurestaticapps.net/)
 - 👤 **Demo Credentials**:
   - **Admin**: `admin / 12345`
   - Or register as a customer or admin

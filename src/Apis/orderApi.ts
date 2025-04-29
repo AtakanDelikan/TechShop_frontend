@@ -29,8 +29,16 @@ const orderApi = createApi({
       invalidatesTags: ["Orders"],
     }),
     getAllOrders: builder.query({
-      query: (userId) => ({
+      query: (params) => ({
         url: "order",
+        params: params,
+        // default params, pageNumber = 1, pageSize = 20, status = ""
+      }),
+      providesTags: ["Orders"],
+    }),
+    getOrdersByUserId: builder.query({
+      query: (userId) => ({
+        url: "order/byUser",
         params: {
           userId: userId,
         },
@@ -60,6 +68,7 @@ const orderApi = createApi({
 export const {
   useCreateOrderMutation,
   useGetAllOrdersQuery,
+  useGetOrdersByUserIdQuery,
   useGetOrderDetailsQuery,
   useUpdateOrderHeaderMutation,
 } = orderApi;

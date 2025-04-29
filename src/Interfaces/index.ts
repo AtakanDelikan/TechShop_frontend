@@ -1,4 +1,3 @@
-import laptopModel from "./laptopModel";
 import shoppingCartModel from "./shoppingCartModel";
 import userModel from "./userModel";
 import apiResponse from "./apiResponse";
@@ -10,7 +9,6 @@ import productModel from "./productModel";
 import productImageModel from "./productImageModel";
 
 export type {
-  laptopModel,
   shoppingCartModel,
   userModel,
   apiResponse,

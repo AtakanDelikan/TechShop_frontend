@@ -1,8 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { laptopReducer } from "./laptopSlice";
 import {
   authApi,
-  laptopApi,
   orderApi,
   paymentApi,
   shoppingCartApi,
@@ -20,10 +18,8 @@ import productImageApi from "../../Apis/productImageApi";
 
 const store = configureStore({
   reducer: {
-    laptopStore: laptopReducer,
     shoppingCartStore: shoppingCartReducer,
     userAuthStore: userAuthReducer,
-    [laptopApi.reducerPath]: laptopApi.reducer,
     [shoppingCartApi.reducerPath]: shoppingCartApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [paymentApi.reducerPath]: paymentApi.reducer,
@@ -39,7 +35,6 @@ const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
-      .concat(laptopApi.middleware)
       .concat(shoppingCartApi.middleware)
       .concat(authApi.middleware)
       .concat(paymentApi.middleware)
