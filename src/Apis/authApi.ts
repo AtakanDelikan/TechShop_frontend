@@ -1,20 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { baseQueryWithReauth } from "./baseQuery";
+import { apiResponse } from "../Interfaces";
 
 export const API_URL = process.env.REACT_APP_API_URL;
 
 const authApi = createApi({
   reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: API_URL,
-    prepareHeaders: (headers) => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
-      }
-
-      return headers;
-    },
-  }),
+  baseQuery: baseQueryWithReauth,
   tagTypes: ["UserData"],
   endpoints: (builder) => ({
     registerUser: builder.mutation({
@@ -37,6 +29,12 @@ const authApi = createApi({
         body: userCredentials,
       }),
     }),
+    logoutUser: builder.mutation<apiResponse, void>({
+      query: () => ({
+        url: "auth/logout",
+        method: "POST",
+      }),
+    }),
     getUserData: builder.query({
       query: () => ({
         url: "auth/userdata",
@@ -57,6 +55,7 @@ const authApi = createApi({
 export const {
   useRegisterUserMutation,
   useLoginUserMutation,
+  useLogoutUserMutation,
   useGetUserDataQuery,
   useUpdateUserDataMutation,
 } = authApi;

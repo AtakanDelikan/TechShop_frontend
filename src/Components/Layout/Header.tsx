@@ -4,14 +4,12 @@ import cartItemModel from "../../Interfaces/cartItemModel";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../Storage/Redux/store";
 import { categoryModel, userModel } from "../../Interfaces";
-import {
-  emptyUserState,
-  setLoggedInUser,
-} from "../../Storage/Redux/userAuthSlice";
+import { setLoggedOutUser } from "../../Storage/Redux/userAuthSlice";
 import { SD_Roles } from "../../Utility/SD";
 import { CategoryDropdownButton } from "../Page/Category";
 import { useGetCategoriesQuery } from "../../Apis/categoryApi";
 import { NavSearchBar } from "../../Pages";
+import { useLogoutUserMutation } from "../../Apis/authApi";
 
 let logo = require("../../Assets/Images/techshop.png");
 
@@ -20,18 +18,25 @@ function Header() {
   const navigate = useNavigate();
   const { data, isLoading } = useGetCategoriesQuery(null);
 
+  const [logoutApi] = useLogoutUserMutation();
+
   const shoppingCartFromStore: cartItemModel[] = useSelector(
-    (state: RootState) => state.shoppingCartStore.cartItems ?? []
+    (state: RootState) => state.shoppingCartStore.cartItems ?? [],
   );
 
   const userData: userModel = useSelector(
-    (state: RootState) => state.userAuthStore
+    (state: RootState) => state.userAuthStore,
   );
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    dispatch(setLoggedInUser({ ...emptyUserState }));
-    navigate("/");
+  const handleLogout = async () => {
+    try {
+      await logoutApi().unwrap();
+    } catch (err) {
+      console.error("Failed to revoke token on server", err);
+    } finally {
+      dispatch(setLoggedOutUser());
+      navigate("/");
+    }
   };
 
   const onCategorySelect = (category: categoryModel) => {

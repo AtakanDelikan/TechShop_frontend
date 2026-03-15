@@ -35,9 +35,10 @@ function Login() {
       password: userInput.password,
     });
     if (response.data) {
-      const { token } = response.data.result;
+      const { token, refreshToken } = response.data.result;
       const { fullName, id, email, role }: userModel = jwtDecode(token);
       localStorage.setItem("token", token);
+      localStorage.setItem("refreshToken", refreshToken);
       dispatch(setLoggedInUser({ fullName, id, email, role }));
       navigate("/userPage");
     } else if (response.error) {

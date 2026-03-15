@@ -18,8 +18,14 @@ export const userAuthSlice = createSlice({
       state.email = action.payload.email;
       state.role = action.payload.role;
     },
+    setLoggedOutUser: (state) => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("refreshToken");
+      
+      return emptyUserState;
+    },
   },
 });
 
-export const { setLoggedInUser } = userAuthSlice.actions;
+export const { setLoggedInUser, setLoggedOutUser } = userAuthSlice.actions;
 export const userAuthReducer = userAuthSlice.reducer;
