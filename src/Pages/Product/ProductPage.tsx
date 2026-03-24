@@ -119,9 +119,7 @@ function ProductPage() {
             </div>
             <div className="mt-4">
               <ProductImageDisplay
-                images={data.result.productImages.map(
-                  (image: any) => image.url
-                )}
+                images={data.result.images}
               />
             </div>
           </div>

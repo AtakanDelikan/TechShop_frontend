@@ -57,9 +57,7 @@ function ProductUpsert() {
         price: productData.result.price,
         stock: productData.result.stock,
       };
-      const urls = productData.result.productImages.map(
-        (item: any) => item.url
-      );
+      const urls = productData.result.images;
       setImages(urls);
       setUserInput(tempData);
       const tempCategory: categoryModel = {

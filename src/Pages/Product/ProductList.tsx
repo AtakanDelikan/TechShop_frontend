@@ -116,7 +116,7 @@ function ProductList() {
                 </div>
                 <div className="col-1">{product.id}</div>
                 <div className="col-2">{product.name}</div>
-                <div className="col-2">{product.category.name}</div>
+                <div className="col-2">{product.categoryName}</div>
                 <div className="col-1">{product.price}€</div>
                 <div className="col-2">{product.stock}</div>
                 <div className="col-1">
