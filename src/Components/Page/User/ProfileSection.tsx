@@ -124,16 +124,16 @@ function ProfileSection() {
         ) : (
           <>
             <p>
-              <strong>Name:</strong> {data.result.name}
+              <strong>Name:</strong> {data?.result?.name}
             </p>
             <p>
-              <strong>Email:</strong> {data.result.email}
+              <strong>Email:</strong> {data?.result?.email}
             </p>
             <p>
-              <strong>Phone:</strong> {data.result.phoneNumber}
+              <strong>Phone:</strong> {data?.result?.phoneNumber}
             </p>
             <p>
-              <strong>Address:</strong> {data.result.address}
+              <strong>Address:</strong> {data?.result?.address}
             </p>
             <button
               className="btn btn-primary"
