@@ -6,6 +6,7 @@ import NotFound from "../NotFound";
 import { SideBarFilter } from "../../Components/Page/Category";
 import { useGetFilteredProductsQuery } from "../../Apis/productApi";
 import { ProductCard } from "../../Components/Page/Product";
+import ProductSortDropdown from "../../Components/Page/Common/ProductSortDropdown";
 
 function CategoryPage() {
   const { id } = useParams();
@@ -18,6 +19,11 @@ function CategoryPage() {
     return isNaN(page) || page < 1 ? 1 : page;
   })();
 
+  const sortString = (() => {
+    const sort = searchParams.get("sort") || "newest";
+    return sort;
+  })();
+
   useEffect(() => {
     const categoryId = id ? id.toString() : "";
     setQueryParams(
@@ -26,9 +32,11 @@ function CategoryPage() {
         "&attributes=" +
         attributeQueryString +
         "&pageSize=9&pageNumber=" +
-        pageNumber
+        pageNumber +
+        "&sort=" +
+        sortString,
     );
-  }, [attributeQueryString, id, pageNumber]);
+  }, [attributeQueryString, id, pageNumber, sortString]);
 
   const { data, isLoading } = useGetCategoryAttributesByIdQuery(id);
   const { data: productsData, isLoading: isProductsLoading } =
@@ -55,6 +63,14 @@ function CategoryPage() {
     }
   };
 
+  const handleSortChange = (newSort: string) => {
+    setSearchParams((prevParams) => {
+      const updatedParams = new URLSearchParams(prevParams);
+      updatedParams.set("sort", newSort); // Update or add sort param
+      return updatedParams;
+    });
+  };
+
   return (
     <>
       <div className="d-flex">
@@ -66,7 +82,11 @@ function CategoryPage() {
 
         {/* Main Content */}
         <div className="p-4 flex-grow-1">
-          <h1>Producs</h1>
+          <h1>Products</h1>
+          <ProductSortDropdown
+            currentSort={sortString}
+            onSortChange={handleSortChange}
+          />
           <PageSelector
             totalPages={totalPages}
             currentPage={pageNumber}
