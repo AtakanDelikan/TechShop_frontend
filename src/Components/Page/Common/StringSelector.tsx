@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 interface Props {
   attribute: any;
   onSelectionChange: (values: string[]) => void;
+  selectedFromUrl?: string[];
 }
 
 function StringSelector(props: Props) {
@@ -11,19 +12,22 @@ function StringSelector(props: Props) {
   // State to manage selected values
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
 
+  // Sync state when URL changes
+  useEffect(() => {
+    if (props.selectedFromUrl) {
+      setSelectedValues(props.selectedFromUrl);
+    }
+  }, [props.selectedFromUrl]);
+
   // Handle checkbox change
   const handleChange = (value: string) => {
-    setSelectedValues(
-      (prev) =>
-        prev.includes(value)
-          ? prev.filter((item) => item !== value) // Remove if already selected
-          : [...prev, value] // Add if not selected
-    );
-  };
+    const newValues = selectedValues.includes(value)
+      ? selectedValues.filter((item) => item !== value)
+      : [...selectedValues, value];
 
-  useEffect(() => {
-    props.onSelectionChange(selectedValues);
-  }, [selectedValues]);
+    setSelectedValues(newValues);
+    props.onSelectionChange(newValues); // Call directly to avoid extra useEffect lag
+  };
 
   return (
     <div>

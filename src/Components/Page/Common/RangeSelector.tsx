@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 interface Props {
   attribute: any;
   onSelectionChange: (values: string[]) => void;
+  selectedFromUrl?: string[];
 }
 
 function RangeSelector(props: Props) {
@@ -13,15 +14,26 @@ function RangeSelector(props: Props) {
   ]);
 
   useEffect(() => {
-    setValues([props.attribute.min, props.attribute.max]);
-  }, [props.attribute.min, props.attribute.max]);
+    if (props.selectedFromUrl && props.selectedFromUrl.length === 2) {
+      const parsedMin = Number(props.selectedFromUrl[0]);
+      const parsedMax = Number(props.selectedFromUrl[1]);
+
+      setValues([
+        isNaN(parsedMin) ? props.attribute.min : parsedMin,
+        isNaN(parsedMax) ? props.attribute.max : parsedMax,
+      ]);
+    } else {
+      // If no values in URL, default to the full range
+      setValues([props.attribute.min, props.attribute.max]);
+    }
+  }, [props.selectedFromUrl, props.attribute.min, props.attribute.max]);
 
   const step = props.attribute?.dataType === 3 ? 0.1 : 1;
 
   const handleChange = (
     event: Event,
     newValue: number | number[],
-    activeThumb: number
+    activeThumb: number,
   ) => {
     if (!Array.isArray(newValue)) {
       return;
@@ -34,14 +46,9 @@ function RangeSelector(props: Props) {
     }
   };
 
-  // useEffect(() => {
-  //   // props.onSelectionChange(values);
-  //   props.onSelectionChange(values.map(String));
-  // }, [values]);
-
   const handleChangeCommitted = (
     event: React.SyntheticEvent | Event,
-    newValue: number | number[]
+    newValue: number | number[],
   ) => {
     if (
       values[0] === props.attribute.min &&

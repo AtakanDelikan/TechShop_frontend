@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BooleanSelector, RangeSelector, StringSelector } from "../Common";
 
 interface Props {
   data: any;
-  setAttributeQueryString: React.Dispatch<React.SetStateAction<string>>;
+  attributeQueryString?: string;
+  setAttributeQueryString: (newSort: string) => void;
 }
 
 function SideBarFilter(props: Props) {
@@ -12,21 +13,51 @@ function SideBarFilter(props: Props) {
   }>({});
 
   const [priceQuery, setPriceQuery] = useState<string>("");
+  const [AttributeQuery, setAttributeQuery] = useState<string>("");
 
-  const attributeQueryString =
-    Object.entries(selectedFilters)
-      .filter(([_, values]) => values.length > 0) // Exclude entries with empty values
-      .map(([attributeId, values]) => `${attributeId}[${values.join("﹐")}]`)
-      .join(";") + priceQuery;
+  // Initial Hydration: Parse URL into local state (Runs once on mount)
+  useEffect(() => {
+    if (props.attributeQueryString) {
+      const filters: { [key: number]: string[] } = {};
+      const [attrPart, pricePart] = props.attributeQueryString.split("&price=");
 
-  props.setAttributeQueryString(attributeQueryString);
+      if (attrPart) {
+        attrPart.split(";").forEach((segment) => {
+          const match = segment.match(/(\d+)\[(.*)\]/);
+          if (match) {
+            const id = parseInt(match[1]);
+            const values = match[2].split("~");
+            filters[id] = values;
+          }
+        });
+      }
+      setSelectedFilters(filters);
+      if (pricePart) setPriceQuery("&price=" + pricePart);
+    }
+    // isHydrated.current = true;
+  }, []);
 
   function handleSelectionChange(attributeId: number, values: string[]) {
-    setSelectedFilters((prev) => ({ ...prev, [attributeId]: values }));
+    const nextFilters = {
+      ...selectedFilters,
+      [attributeId]: values,
+    };
+
+    const query = Object.entries(nextFilters)
+      .filter(([_, values]) => values.length > 0)
+      .map(([id, values]) => `${id}[${values.join("~")}]`)
+      .join(";");
+
+    props.setAttributeQueryString(query + priceQuery);
+    setSelectedFilters(nextFilters);
+    setAttributeQuery(query);
   }
 
   function handlePriceChange(values: string[]) {
-    setPriceQuery("&price=" + values[0] + "﹐" + values[1]);
+    const newPriceQuery = "&price=" + values[0] + "~" + values[1];
+
+    props.setAttributeQueryString(AttributeQuery + newPriceQuery);
+    setPriceQuery(newPriceQuery);
   }
 
   const priceAttribute = {
@@ -34,6 +65,11 @@ function SideBarFilter(props: Props) {
     max: props.data.maxPrice,
     dataType: 3,
     attributeName: "Price",
+  };
+
+  const getPriceValues = () => {
+    if (!priceQuery) return [];
+    return priceQuery.replace("&price=", "").split("~");
   };
 
   return (
@@ -61,9 +97,11 @@ function SideBarFilter(props: Props) {
           <RangeSelector
             attribute={priceAttribute}
             onSelectionChange={handlePriceChange}
+            selectedFromUrl={getPriceValues()}
           />
         </div>
         {props.data.attributes.map((attribute: any) => {
+          const currentSelections = selectedFilters[attribute.id] || [];
           switch (attribute.dataType) {
             case 1:
               return (
@@ -73,6 +111,7 @@ function SideBarFilter(props: Props) {
                     onSelectionChange={(values: string[]) =>
                       handleSelectionChange(attribute.id, values)
                     }
+                    selectedFromUrl={currentSelections}
                   />
                 </div>
               );
@@ -86,6 +125,7 @@ function SideBarFilter(props: Props) {
                     onSelectionChange={(values: string[]) =>
                       handleSelectionChange(attribute.id, values)
                     }
+                    selectedFromUrl={currentSelections}
                   />
                 </div>
               );
@@ -97,6 +137,7 @@ function SideBarFilter(props: Props) {
                     onSelectionChange={(values: string[]) =>
                       handleSelectionChange(attribute.id, values)
                     }
+                    selectedFromUrl={currentSelections}
                   />
                 </div>
               );

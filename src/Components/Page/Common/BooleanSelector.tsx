@@ -3,20 +3,25 @@ import React, { useEffect, useState } from "react";
 interface Props {
   attribute: any;
   onSelectionChange: (values: string[]) => void;
+  selectedFromUrl?: string[];
 }
 
 function BooleanSelector(props: Props) {
   const [selectedValue, setSelectedValue] = useState<string>("");
 
-  const handleChange = (value: string) => {
-    setSelectedValue(
-      (prev) => (prev === value ? (prev = "") : (prev = value)) // Add if not selected
-    );
-  };
-
   useEffect(() => {
-    props.onSelectionChange(selectedValue ? [selectedValue] : []);
-  }, [selectedValue]);
+    if (props.selectedFromUrl && props.selectedFromUrl.length > 0) {
+      setSelectedValue(props.selectedFromUrl[0]);
+    } else {
+      setSelectedValue("");
+    }
+  }, [props.selectedFromUrl]);
+
+  const handleChange = (clickedValue: string) => {
+    const nextValue = selectedValue === clickedValue ? "" : clickedValue;
+    setSelectedValue(nextValue);
+    props.onSelectionChange(nextValue ? [nextValue] : []);
+  };
 
   return (
     <div>

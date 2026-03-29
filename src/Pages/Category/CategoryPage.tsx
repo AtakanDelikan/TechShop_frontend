@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { MainLoader, PageSelector } from "../../Components/Page/Common";
 import { useGetCategoryAttributesByIdQuery } from "../../Apis/categoryAttributeApi";
@@ -11,36 +11,23 @@ import ProductSortDropdown from "../../Components/Page/Common/ProductSortDropdow
 function CategoryPage() {
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [attributeQueryString, setAttributeQueryString] = useState("");
-  const [queryParams, setQueryParams] = useState("");
 
-  const pageNumber = (() => {
-    const page = parseInt(searchParams.get("page") || "1", 10);
-    return isNaN(page) || page < 1 ? 1 : page;
-  })();
+  const [currentId, setCurrentId] = useState(id);
 
-  const sortString = (() => {
-    const sort = searchParams.get("sort") || "newest";
-    return sort;
-  })();
+  if (id !== currentId) {
+    setCurrentId(id);
+    setSearchParams({}, { replace: true });
+  }
 
-  useEffect(() => {
-    const categoryId = id ? id.toString() : "";
-    setQueryParams(
-      "category=" +
-        categoryId +
-        "&attributes=" +
-        attributeQueryString +
-        "&pageSize=9&pageNumber=" +
-        pageNumber +
-        "&sort=" +
-        sortString,
-    );
-  }, [attributeQueryString, id, pageNumber, sortString]);
+  const pageNumber = parseInt(searchParams.get("page") || "1", 10);
+  const sortString = searchParams.get("sort") || "newest";
+  const attributeString = searchParams.get("attributes") || "";
+
+  const apiQuery = `category=${id}&attributes=${attributeString}&pageSize=9&pageNumber=${pageNumber}&sort=${sortString}`;
 
   const { data, isLoading } = useGetCategoryAttributesByIdQuery(id);
   const { data: productsData, isLoading: isProductsLoading } =
-    useGetFilteredProductsQuery(queryParams);
+    useGetFilteredProductsQuery(apiQuery);
 
   if (isLoading || isProductsLoading) {
     return <MainLoader />;
@@ -67,6 +54,16 @@ function CategoryPage() {
     setSearchParams((prevParams) => {
       const updatedParams = new URLSearchParams(prevParams);
       updatedParams.set("sort", newSort); // Update or add sort param
+      updatedParams.set("page", "1"); // Reset to first page on sort change
+      return updatedParams;
+    });
+  };
+
+  const handleAttributeChange = (newAttributes: string) => {
+    setSearchParams((prevParams) => {
+      const updatedParams = new URLSearchParams(prevParams);
+      updatedParams.set("attributes", newAttributes); // Update or add attributes param
+      updatedParams.set("page", "1"); // Reset to first page on filter change
       return updatedParams;
     });
   };
@@ -76,8 +73,10 @@ function CategoryPage() {
       <div className="d-flex">
         {/* Sidebar */}
         <SideBarFilter
+          key={id} // Whenever ID changes, sidebar resets completely
           data={data?.result}
-          setAttributeQueryString={setAttributeQueryString}
+          setAttributeQueryString={handleAttributeChange}
+          attributeQueryString={attributeString}
         />
 
         {/* Main Content */}
@@ -97,7 +96,7 @@ function CategoryPage() {
               productsData?.result?.products?.map(
                 (product: any, index: number) => (
                   <ProductCard product={product} key={index} />
-                )
+                ),
               )}
           </div>
           <PageSelector
