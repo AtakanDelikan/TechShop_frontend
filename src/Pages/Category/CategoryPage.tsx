@@ -81,17 +81,23 @@ function CategoryPage() {
 
         {/* Main Content */}
         <div className="p-4 flex-grow-1">
-          <h1>Products</h1>
-          <ProductSortDropdown
-            currentSort={sortString}
-            onSortChange={handleSortChange}
-          />
+          <h1 className="m-0">
+            {productsData?.result?.availableCategories[0]?.categoryName ||
+              "Products"}
+          </h1>
+          <div className="d-flex align-items-baseline gap-5 mb-4">
+            <ProductSortDropdown
+              currentSort={sortString}
+              onSortChange={handleSortChange}
+            />
+            <h4 className="m-0 text-muted">{totalItems} items</h4>
+          </div>
           <PageSelector
             totalPages={totalPages}
             currentPage={pageNumber}
             onPageSelect={handlePageChange}
           />
-          <div className="container row">
+          <div className="row w-100">
             {productsData?.result?.products?.length > 0 &&
               productsData?.result?.products?.map(
                 (product: any, index: number) => (

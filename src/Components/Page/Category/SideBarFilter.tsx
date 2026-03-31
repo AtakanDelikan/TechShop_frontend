@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { BooleanSelector, ProductSearchBar, RangeSelector, StringSelector } from "../Common";
+import {
+  BooleanSelector,
+  ProductSearchBar,
+  RangeSelector,
+  StringSelector,
+} from "../Common";
 
 interface Props {
   data: any;
@@ -24,7 +29,7 @@ function SideBarFilter(props: Props) {
       let attrPart = "";
       let pricePart = "";
       let searchPart = "";
-      
+
       const segments = props.attributeQueryString.split("&");
 
       attrPart = segments[0];
@@ -81,6 +86,15 @@ function SideBarFilter(props: Props) {
     setSearchQuery(newSearchQuery);
   }
 
+  function handleClearAll() {
+    setSelectedFilters({});
+    setPriceQuery("");
+    setAttributeQuery("");
+    setSearchQuery("");
+
+    props.setAttributeQueryString("");
+  }
+
   const priceAttribute = {
     min: 0,
     max: props.data.maxPrice,
@@ -107,7 +121,21 @@ function SideBarFilter(props: Props) {
         paddingBottom: "60px",
       }}
     >
-      <h4 className="mb-5">Filter Products</h4>
+      <div className="d-flex justify-content-between align-items-center mb-5">
+        <h4 className="m-0">Filter Products</h4>
+        {(Object.values(selectedFilters).some((v) => v.length > 0) ||
+          priceQuery ||
+          attributeQuery ||
+          searchQuery) && (
+          <button
+            type="button"
+            className="btn btn-outline-danger btn-sm"
+            onClick={handleClearAll}
+          >
+            Clear All Filters
+          </button>
+        )}
+      </div>
       <ul
         className="list-group"
         style={{
@@ -115,7 +143,10 @@ function SideBarFilter(props: Props) {
         }}
       >
         <div className="input-group" style={{ width: "300px" }}>
-          <ProductSearchBar onSearch={handleSearchChange} initialValue={searchQuery.replace("&search=", "")} />
+          <ProductSearchBar
+            onSearch={handleSearchChange}
+            initialValue={searchQuery.replace("&search=", "")}
+          />
         </div>
         <div key={0} className="mb-5">
           <RangeSelector
