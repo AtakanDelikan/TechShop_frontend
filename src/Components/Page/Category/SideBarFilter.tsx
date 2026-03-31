@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BooleanSelector, RangeSelector, StringSelector } from "../Common";
+import { BooleanSelector, ProductSearchBar, RangeSelector, StringSelector } from "../Common";
 
 interface Props {
   data: any;
@@ -13,13 +13,28 @@ function SideBarFilter(props: Props) {
   }>({});
 
   const [priceQuery, setPriceQuery] = useState<string>("");
-  const [AttributeQuery, setAttributeQuery] = useState<string>("");
+  const [attributeQuery, setAttributeQuery] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   // Initial Hydration: Parse URL into local state (Runs once on mount)
   useEffect(() => {
     if (props.attributeQueryString) {
       const filters: { [key: number]: string[] } = {};
-      const [attrPart, pricePart] = props.attributeQueryString.split("&price=");
+
+      let attrPart = "";
+      let pricePart = "";
+      let searchPart = "";
+      
+      const segments = props.attributeQueryString.split("&");
+
+      attrPart = segments[0];
+      segments.slice(1).forEach((segment) => {
+        if (segment.startsWith("price=")) {
+          pricePart = segment.replace("price=", "");
+        } else if (segment.startsWith("search=")) {
+          searchPart = segment.replace("search=", "");
+        }
+      });
 
       if (attrPart) {
         attrPart.split(";").forEach((segment) => {
@@ -32,9 +47,10 @@ function SideBarFilter(props: Props) {
         });
       }
       setSelectedFilters(filters);
+      if (attrPart) setAttributeQuery(attrPart);
       if (pricePart) setPriceQuery("&price=" + pricePart);
+      if (searchPart) setSearchQuery("&search=" + searchPart);
     }
-    // isHydrated.current = true;
   }, []);
 
   function handleSelectionChange(attributeId: number, values: string[]) {
@@ -48,16 +64,21 @@ function SideBarFilter(props: Props) {
       .map(([id, values]) => `${id}[${values.join("~")}]`)
       .join(";");
 
-    props.setAttributeQueryString(query + priceQuery);
+    props.setAttributeQueryString(query + priceQuery + searchQuery);
     setSelectedFilters(nextFilters);
     setAttributeQuery(query);
   }
 
   function handlePriceChange(values: string[]) {
     const newPriceQuery = "&price=" + values[0] + "~" + values[1];
-
-    props.setAttributeQueryString(AttributeQuery + newPriceQuery);
+    props.setAttributeQueryString(attributeQuery + newPriceQuery + searchQuery);
     setPriceQuery(newPriceQuery);
+  }
+
+  function handleSearchChange(searchTerm: string) {
+    const newSearchQuery = "&search=" + searchTerm;
+    props.setAttributeQueryString(attributeQuery + priceQuery + newSearchQuery);
+    setSearchQuery(newSearchQuery);
   }
 
   const priceAttribute = {
@@ -93,6 +114,9 @@ function SideBarFilter(props: Props) {
           paddingBottom: "60px",
         }}
       >
+        <div className="input-group" style={{ width: "300px" }}>
+          <ProductSearchBar onSearch={handleSearchChange} initialValue={searchQuery.replace("&search=", "")} />
+        </div>
         <div key={0} className="mb-5">
           <RangeSelector
             attribute={priceAttribute}
