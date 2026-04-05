@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useGetSearchedProductsQuery } from "../Apis/productApi";
-import { useGetSearchedCategoriesQuery } from "../Apis/categoryApi";
+import { useGetFilteredProductsQuery } from "../Apis/productApi";
+import { MiniLoader } from "../Components/Page/Common";
 
 function NavSearchBar() {
-  const [productSearchQuery, setProductSearchQuery] = useState<string>("");
-  const [categorySearchQuery, setCategorySearchQuery] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const { data: productData, isLoading: productIsLoading } =
-    useGetSearchedProductsQuery(productSearchQuery);
-  const { data: categoryData, isLoading: categoryIsLoading } =
-    useGetSearchedCategoriesQuery(categorySearchQuery);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
+  const { data, isFetching } = useGetFilteredProductsQuery(searchQuery, {
+    // Only run the query if searchTerm has a value
+    skip: !searchQuery || searchQuery.trim() === "",
+  });
 
   const [productSearchResults, setProductSearchResults] = useState<any[]>([]);
   const [categorySearchResults, setCategorySearchResults] = useState<any[]>([]);
@@ -42,24 +42,24 @@ function NavSearchBar() {
     // Debounce search (wait 1 seconds after user stops typing)
     const delayDebounce = setTimeout(() => {
       setShowDropdown(true);
-      setProductSearchQuery("searchTerm=" + searchTerm + "&pageSize=10");
-      setCategorySearchQuery("searchTerm=" + searchTerm + "&count=5");
+      if (searchTerm.trim() === "") {
+        setSearchQuery("");
+      } else {
+        setSearchQuery("search=" + searchTerm + "&pageSize=10&pageNumber=1");
+      }
     }, 1000);
 
     return () => clearTimeout(delayDebounce);
   }, [searchTerm]);
 
   useEffect(() => {
-    if (!productIsLoading) {
-      setProductSearchResults(productData.result.products);
+    if (!isFetching) {
+      setProductSearchResults(data?.result?.products?.slice(0, 10) || []);
+      setCategorySearchResults(
+        data?.result?.availableCategories?.slice(0, 7) || [],
+      );
     }
-  }, [productData]);
-
-  useEffect(() => {
-    if (!categoryIsLoading) {
-      setCategorySearchResults(categoryData.result);
-    }
-  }, [categoryData]);
+  }, [data, isFetching]);
 
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -108,7 +108,11 @@ function NavSearchBar() {
         >
           {/* Products Section */}
           <li className="list-group-item fw-bold bg-light">Products</li>
-          {productSearchResults.length > 0 ? (
+          {isFetching ? (
+            <li className="list-group-item bg-light">
+              <MiniLoader /> Loading...
+            </li>
+          ) : productSearchResults.length > 0 ? (
             productSearchResults.map((product) => (
               <li
                 key={product.id}
@@ -124,15 +128,19 @@ function NavSearchBar() {
           )}
           {/* Categories Section */}
           <li className="list-group-item fw-bold bg-light">Categories</li>
-          {categorySearchResults.length > 0 ? (
+          {isFetching ? (
+            <li className="list-group-item bg-light">
+              <MiniLoader /> Loading...
+            </li>
+          ) : categorySearchResults.length > 0 ? (
             categorySearchResults.map((category) => (
               <li
-                key={category.id}
+                key={category.categoryId}
                 className="list-group-item list-group-item-action"
-                onClick={() => handleSelectCategory(category.id)}
+                onClick={() => handleSelectCategory(category.categoryId)}
                 style={{ cursor: "pointer" }}
               >
-                {category.name}
+                {category.categoryName}
               </li>
             ))
           ) : (
