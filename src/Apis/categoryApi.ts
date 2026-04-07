@@ -20,12 +20,6 @@ const categoryApi = createApi({
       }),
       providesTags: ["Categories"],
     }),
-    getSearchedCategories: builder.query({
-      query: (params) => ({
-        url: `category/search?${params}`,
-      }),
-      providesTags: ["Categories"],
-    }),
     createCategory: builder.mutation({
       query: (data) => ({
         url: "category",
@@ -58,6 +52,5 @@ export const {
   useCreateCategoryMutation,
   useUpdateCategoryMutation,
   useDeleteCategoryMutation,
-  useGetSearchedCategoriesQuery,
 } = categoryApi;
 export default categoryApi;

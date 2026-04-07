@@ -32,12 +32,6 @@ const productApi = createApi({
       }),
       providesTags: ["Products"],
     }),
-    getSearchedProducts: builder.query({
-      query: (params) => ({
-        url: `product/search?${params}`,
-      }),
-      providesTags: ["Products"],
-    }),
     createProduct: builder.mutation({
       query: (data) => ({
         url: "product",
@@ -72,6 +66,5 @@ export const {
   useUpdateProductMutation,
   useDeleteProductMutation,
   useGetFilteredProductsQuery,
-  useGetSearchedProductsQuery,
 } = productApi;
 export default productApi;
