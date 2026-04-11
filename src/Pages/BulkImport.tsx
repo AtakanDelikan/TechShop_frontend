@@ -9,58 +9,100 @@ import {
 function BulkImport() {
   const [categoryFile, setCategoryFile] = useState<File | null>(null);
   const [attributeFile, setAttributeFile] = useState<File | null>(null);
-  const [productFile, setProductFile] = useState<File | null>(null);
+  const [productFiles, setProductFiles] = useState<FileList | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [importCategories] = useBulkImportCategoriesMutation();
   const [importCategoryAttributes] = useBulkImportCategoryAttributesMutation();
   const [importProducts] = useBulkImportProductsMutation();
 
-  const handleFileChange = (
+  // --- Handler for single files (Categories, Attributes) ---
+  const handleSingleFileChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     setFile: React.Dispatch<React.SetStateAction<File | null>>
   ) => {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
 
-      // Validate file type (must be CSV)
       if (file.type !== "text/csv" && !file.name.endsWith(".csv")) {
         toastNotify("Invalid file type. Please upload a CSV file.", "error");
         return;
       }
-
-      // Validate file size (max 1MB)
       if (file.size > 1024 * 1024) {
-        toastNotify(
-          "File size exceeds 1MB. Please upload a smaller file.",
-          "error"
-        );
+        toastNotify("File size exceeds 1MB. Please upload a smaller file.", "error");
         return;
       }
-
       setFile(file);
     }
   };
 
-  const handleUpload = async (file: File | null, endpoint: any) => {
+  // --- Handler for multiple files (Products) ---
+  const handleMultipleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      const files = Array.from(event.target.files);
+      
+      // Validate all selected files
+      for (let i = 0; i < files.length; i++) {
+        if (files[i].type !== "text/csv" && !files[i].name.endsWith(".csv")) {
+          toastNotify(`Invalid file: ${files[i].name}. Must be CSV.`, "error");
+          return;
+        }
+      }
+      // Store the entire FileList in state
+      setProductFiles(event.target.files);
+    }
+  };
+
+  // --- Upload executor for single files ---
+  const handleSingleUpload = async (file: File | null, endpoint: any) => {
     if (!file) {
       toastNotify("Please select a file first.", "error");
       return;
     }
-    toastNotify("Uploading file. Please wait.", "info");
+    
     setIsLoading(true);
-    setCategoryFile(null);
-    setAttributeFile(null);
-    setProductFile(null);
+    toastNotify("Uploading file. Please wait.", "info");
 
-    const response = await endpoint(file);
-    console.log(response);
+    // Construct FormData for single file
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await endpoint(formData);
+    
     if (response.error) {
       toastNotify("Failed to upload file.", "error");
     } else {
       toastNotify("File uploaded successfully!", "success");
+      setCategoryFile(null);
+      setAttributeFile(null);
+    }
+    setIsLoading(false);
+  };
+
+  // --- Upload executor for multiple files ---
+  const handleMultipleUpload = async () => {
+    if (!productFiles || productFiles.length === 0) {
+      toastNotify("Please select product files first.", "error");
+      return;
     }
 
+    setIsLoading(true);
+    toastNotify("Uploading products. Please wait.", "info");
+
+    const formData = new FormData();
+    
+    for (let i = 0; i < productFiles.length; i++) {
+      formData.append("files", productFiles[i]);
+    }
+
+    const response = await importProducts(formData);
+    
+    if (response.error) {
+      toastNotify("Failed to upload products.", "error");
+    } else {
+      toastNotify("All product files uploaded successfully!", "success");
+      setProductFiles(null);
+    }
     setIsLoading(false);
   };
 
@@ -73,18 +115,20 @@ function BulkImport() {
       </h5>
       <div className="justify-content-center row mt-3">
         <div className="col-8">
+          
           {/* Categories Upload */}
           <div className="m-5">
             <label className="form-label">Upload Categories CSV</label>
             <input
               type="file"
+              accept=".csv"
               className="form-control"
-              onChange={(e) => handleFileChange(e, setCategoryFile)}
+              onChange={(e) => handleSingleFileChange(e, setCategoryFile)}
               disabled={isLoading}
             />
             <button
               className="btn btn-primary mt-2"
-              onClick={() => handleUpload(categoryFile, importCategories)}
+              onClick={() => handleSingleUpload(categoryFile, importCategories)}
               disabled={isLoading}
             >
               Upload Categories
@@ -96,38 +140,40 @@ function BulkImport() {
             <label className="form-label">Upload Category Attributes CSV</label>
             <input
               type="file"
+              accept=".csv"
               className="form-control"
-              onChange={(e) => handleFileChange(e, setAttributeFile)}
+              onChange={(e) => handleSingleFileChange(e, setAttributeFile)}
               disabled={isLoading}
             />
             <button
               className="btn btn-primary mt-2"
-              onClick={() =>
-                handleUpload(attributeFile, importCategoryAttributes)
-              }
+              onClick={() => handleSingleUpload(attributeFile, importCategoryAttributes)}
               disabled={isLoading}
             >
               Upload Category Attributes
             </button>
           </div>
 
-          {/* Products Upload */}
+          {/* Products Upload*/}
           <div className="m-5">
             <label className="form-label">Upload Products CSV</label>
             <input
               type="file"
+              accept=".csv"
+              multiple
               className="form-control"
-              onChange={(e) => handleFileChange(e, setProductFile)}
+              onChange={handleMultipleFileChange}
               disabled={isLoading}
             />
             <button
               className="btn btn-primary mt-2"
-              onClick={() => handleUpload(productFile, importProducts)}
+              onClick={handleMultipleUpload}
               disabled={isLoading}
             >
               Upload Products
             </button>
           </div>
+
         </div>
       </div>
     </div>

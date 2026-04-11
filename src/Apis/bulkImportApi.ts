@@ -8,37 +8,31 @@ const bulkImportApi = createApi({
   baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
     bulkImportCategories: builder.mutation({
-      query: (file) => {
-        const formData = new FormData();
-        formData.append("file", file);
+      query: (data: FormData) => {
         return {
           url: "BulkImport/importCategories",
           method: "POST",
-          body: formData,
+          body: data,
         };
       },
     }),
 
     bulkImportCategoryAttributes: builder.mutation({
-      query: (file) => {
-        const formData = new FormData();
-        formData.append("file", file);
+      query: (data: FormData) => {
         return {
           url: "BulkImport/importCategoryAttributes",
           method: "POST",
-          body: formData,
+          body: data,
         };
       },
     }),
 
     bulkImportProducts: builder.mutation({
-      query: (file) => {
-        const formData = new FormData();
-        formData.append("file", file);
+      query: (data: FormData) => {
         return {
           url: "BulkImport/importProducts",
           method: "POST",
-          body: formData,
+          body: data,
         };
       },
     }),
